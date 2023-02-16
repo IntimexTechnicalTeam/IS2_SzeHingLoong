@@ -193,14 +193,18 @@ export default class InsComments extends Vue {
 .comments_container{
     width: 95%;
     margin: 0 auto;
-    padding-top: 2rem;
-    min-height: 7rem;
     font-size: 1.3rem;
     color: #333;
-    border: 1px solid #000;
+    border: 1px solid #aa1638;
     border-radius: 5px;
     margin-top: 1rem;
     min-height: 20rem;
+    box-sizing: border-box;
+
+}
+.NocontentTips{
+  padding: 1rem;
+  font-size: 1.2rem;
 }
 .comments_sender{
     display: flex;
@@ -220,7 +224,7 @@ export default class InsComments extends Vue {
     min-height: 20rem;
     border-radius: 5px;
     margin-bottom: 1rem;
-    padding:0 1rem;
+    padding:1rem;
     box-sizing: border-box;
 }
 .comments_item{

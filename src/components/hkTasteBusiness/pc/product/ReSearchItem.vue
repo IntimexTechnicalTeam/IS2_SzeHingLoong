@@ -2,14 +2,14 @@
     <li class="ReSearchItem">
           <p class="category">
           {{searchGroup.Name}}
-            <i class="el-icon-arrow-up"  @click="isOpen = !isOpen" v-if="!isOpen"></i>
-            <i class="el-icon-arrow-down" @click="isOpen = !isOpen" v-else></i>
+            <i class="el-icon-arrow-up"  @click="isOpen = !isOpen" v-if="!isOpen"><span>{{$t('product.PutawayL')}}</span></i>
+            <i class="el-icon-arrow-down" @click="isOpen = !isOpen" v-else><span>{{$t('product.More')}}</span></i>
         </p>
           <transition name="fade">
           <ul :class="{'open': isOpen}">
             <li>
                 <input type="checkbox" :id="searchGroup.Name+'-All'" v-model="isAll" @click="checkAll($event,searchGroup)">
-                <label :for="searchGroup.Name+'-All'" >{{$t('Message.All')}}</label>
+                <label :for="searchGroup.Name+'-All'" >{{$t('product.ViewAll')}}</label>
             </li>
             <li v-for="(child, index2) in (searchType === 1 ? searchGroup.AttrValues : searchType === 2 ? searchGroup.Children : [])" :key="index2">
                 <input type="checkbox" :id="child.Name+index2" :value="child.Id" v-model="checkedValue" @click="selectAttr(searchGroup)">
@@ -106,32 +106,59 @@ export default class InsAdvancedSearch extends Vue {
 
       p.category {
         width: 100%;
-        font-size:1.6rem;
+        font-size:20px;
         color: #333333;
         background-color: #FFF;
         display: flex;
         justify-self: start;;
         align-items: center;
         flex-shrink: 0;
-        padding-top: 2rem;
-        padding-bottom: 2rem;
+        padding-top: 0;
+        padding-bottom: 0;
         position: relative;
         i{
           position: absolute;
-          right: 0px;
-          top: 2rem;
-          font-size: 1.6rem;
+          right: 0;
+          top: 50%;
+          font-size: 16px;
+          transform: translateY(-50%);
+          display: flex;
+          align-items: center;
+          color: #ab1638;
+          cursor: pointer;
+          span{
+            font-size: 16px;
+            margin-right: 10px;
+            color: #a0a0a0;
+            cursor: pointer;
+          }
+        }
+        .el-icon-arrow-up::before{
+          display: none;
+        }
+        .el-icon-arrow-up::after{
+          content: "\E6E1";
+        }
+        .el-icon-arrow-down::before{
+          display: none;
+        }
+        .el-icon-arrow-down::after{
+          content: "\E6DF";
         }
     }
 
      >ul {
        transition: all 3s;
+       margin-top: 20px;
         >li {
-            height: 50px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: flex-start;
-            padding-right: 1rem;
+            // padding-right: 1rem;
+            background-color: #f5f5f5;
+            margin-bottom: 20px;
+            text-align: center;
             input[type="checkbox"] {
                 width: 2rem;
                 height: 2rem;
@@ -139,6 +166,7 @@ export default class InsAdvancedSearch extends Vue {
                 -webkit-appearance:none;
                 border: 1px solid #cccccc;
                 outline: none;
+                display: none;
             }
 
             input[type="checkbox"]:checked {
@@ -149,15 +177,18 @@ export default class InsAdvancedSearch extends Vue {
                 background-size: auto;
 
                 &+label {
-                    color: #000;
+                    color: #ab1638;
+                    border: 1px solid #ab1638;
+                    background-color: #fff;
                 }
             }
 
             label {
-            font-size: 18px;
+            font-size: 16px;
             color: #666666;
-            width: 90%;
-            margin-left: 5px;
+            width: 100%;
+            line-height: 45px;
+            // margin-left: 5px;
             }
         }
 

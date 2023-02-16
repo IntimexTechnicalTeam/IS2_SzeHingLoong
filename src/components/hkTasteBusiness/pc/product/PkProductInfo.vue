@@ -90,7 +90,13 @@ export default class PkProductInfo extends Vue {
     overflow: hidden;
     -webkit-box-orient: vertical;
     word-wrap: break-word;
-    text-align: center;
+    text-align: left;
+    line-height: 25px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-break: break-word;
 }
 .p-name-box .in_pannel_addtofav{
     position: absolute;
@@ -141,10 +147,10 @@ export default class PkProductInfo extends Vue {
     font-size: 16px!important;
     position: relative;
     width: 88%;
-    text-align: center;
+    text-align: left;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
   >img{
     position: absolute;
     right: 0;

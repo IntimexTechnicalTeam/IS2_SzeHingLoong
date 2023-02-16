@@ -4,25 +4,26 @@
       <a href="javascript:void(0);" @click="toTop"
         ><img src="/static/Image/mobile/home/down.png"
       /></a>
-      <a href="javascript:void(0);" @click="show = !show"
-        ><img src="/static/Image/mobile/home/down2.png"
-      /></a>
+
       <span v-show="show">
         <a
           href="https://api.whatsapp.com/send?phone=8529876%205436&text=%E6%88%91%E6%83%B3%E6%9F%A5%E8%AF%A2%E4%B8%80%E4%B8%8B"
           target="_blank"
           ><img src="/static/Image/mobile/home/whatsapp.png"
         /></a>
-        <a href="javascript:;" class="livechat" @click="showLivechat"
+        <!-- <a href="javascript:;" class="livechat" @click="showLivechat"
           ><img src="/static/Image/mobile/home/facebook.png"
-        /></a>
-        <a href="tel:85298765436" class="fb-button" target="_blank"
+        /></a> -->
+        <a href="tel:85227988993" class="fb-button" target="_blank"
           ><img src="/static/Image/mobile/home/phone.png"
         /></a>
-        <a href="mailto:info@hktaste.com.hk" class="fb-button"
+        <a href="mailto:enquiry@shlhk.com" class="fb-button"
           ><img src="/static/Image/mobile/home/news.png"
         /></a>
       </span>
+      <a href="javascript:void(0);" @click="show = !show"
+        ><img src="/static/Image/mobile/home/down2.png"
+      /></a>
     </div>
     <!-- 显示livechat -->
     <div class="fb-livechat">
@@ -72,7 +73,7 @@ export default class InsSidebar extends Vue {
     $('.fb-livechat').fadeToggle();
   }
   toTop() {
-    document.body.scrollTop = document.documentElement.scrollTop = 0;
+    // document.body.scrollTop = document.documentElement.scrollTop = 0;
     // window.addEventListener('scroll', () => {
     //   let scrollY = document.documentElement.scrollTop || document.body.scrollTop;
     //   let width = (document.documentElement.offsetWidth - 1100) / 2;
@@ -91,6 +92,16 @@ export default class InsSidebar extends Vue {
     //     this.isShow = false;
     //   }
     // });
+    let top = document.documentElement.scrollTop;
+
+    const timeTop = setInterval(() => {
+      document.documentElement.scrollTop = top -= 50;
+
+      if (top <= 0) {
+        clearInterval(timeTop);
+      }
+    }, 10);
+    this.show = false;
   }
 
   mounted() {
@@ -209,12 +220,12 @@ export default class InsSidebar extends Vue {
 }
 #sidebar {
   img {
-    width: 4rem;
+    width: 3.5rem;
   }
   position: fixed;
   right: 0 !important;
   bottom: 60px;
-  width: 4rem;
+  width: 3.5rem;
   // text-align: center;
   z-index: 997;
   line-height: 0;

@@ -1,7 +1,11 @@
 <template>
   <div class="shoppingcart_warrper">
     <!--main-content-->
-        <div class="shoppingcart_header">{{$t('Shoppingcart.ShoppingcartTitle')}}</div>
+        <div class="shoppingcart_header TitleBg">
+          <div class="innerBox">
+            {{$t('Shoppingcart.ShoppingcartTitle')}}
+          </div>
+        </div>
         <div class="ShoppingCartItem_warpper"  v-for="(one,index) in items" :key="index">
             <div class="shoppingcart_item_image">
                 <a class="product-img" v-bind:href="'/product/Detail/'+one.Product.Sku">
@@ -10,11 +14,14 @@
             </div>
             <div class="shoppingcart_item_detail">
                 <div class="shoppingcart_item_name">{{one.Product.Name}}</div>
-                <div class="shoppingcart_item_code">{{one.Product.Code}}</div>
-                <div class="shoppingcart_item_attr">
+                <!-- <div class="shoppingcart_item_code">{{one.Product.Code}}</div> -->
+                <!-- <div class="shoppingcart_item_attr">
                       <span v-if="one.AttrName1">{{one.AttrTypeName1}}：{{one.AttrName1}}</span>&nbsp;
                       <span v-if="one.AttrName2">{{one.AttrTypeName2}}：{{one.AttrName2}}</span>&nbsp;
                       <span v-if="one.AttrName3">{{one.AttrTypeName3}}：{{one.AttrName3}}</span>&nbsp;
+                </div> -->
+                <div class="shoppingcart_item_price">
+                    <div>{{Currency.Code}} {{(one.Product.SalePrice) | PriceFormat}}</div>
                 </div>
                 <div class="shoppingcart_item_qty">
                   <div class="common-num">
@@ -36,17 +43,15 @@
                       <a class="add-num" href="javascript:;" v-on:click="plusQty(one,one.Id,$event);" :class="{'disabled':one.IsAdd}">+</a>
                       </div>
                 </div>
-                <div class="shoppingcart_item_price">
-                    <div>{{Currency.Code}} {{(one.Product.SalePrice) | PriceFormat}}</div>
-                </div>
+
             </div>
             <div class="close"  v-on:click="removeItem(index)">
-                <i class="el-icon-circle-close"></i>
+                <i class="el-icon-close"></i>
             </div>
         </div>
         <div>
-          <div class="shoppingcart_total1">{{Currency.Code}} {{(totalAmount) | PriceFormat}}</div>
-          <div class="shoppingcart_total"><ElButton type="success" @click="submit"><span style="font-size:1.5rem;">{{ $t('Shoppingcart.ProceedToCheckout') }}</span></ElButton></div>
+          <div class="shoppingcart_total1"><span>{{$t('Shoppingcart.SubTotal')}}:</span>&nbsp;&nbsp;{{Currency.Code}} {{(totalAmount) | PriceFormat}}</div>
+          <div class="shoppingcart_total"><ElButton type="success" @click="submit"><span style="font-size:1.5rem;">{{ $t('Shoppingcart.Checkout') }}</span></ElButton></div>
         </div>
     <!--main-content-->
   </div>
@@ -124,6 +129,7 @@ export default class InsShoppingcart extends Vue {
     let item:ShopCartItem = this.items.splice(one, 1)[0];
     this.$Api.shoppingCart.removeItem(item.Id).then(result => {
       this.$store.dispatch('setShopCart', this.$Api.shoppingCart.getShoppingCart());
+      if (this.ShoppingCart.Items.length === 0) this.$Confirm(this.$t('Message.Message'), this.$t('Shoppingcart.None'), () => { this.$router.push('/product/search/-'); }, () => { this.$router.push('/'); });
     });
   }
   next () {
@@ -228,33 +234,50 @@ export default class InsShoppingcart extends Vue {
     padding-bottom: 1rem;
     border-bottom: 1px solid #eee;
     position: relative;
+    width: 94%;
+    margin: 0 auto;
     .close{
         position: absolute;
-        top: 1rem;
-        right: 1rem;
+        top: 50%;
+        right: 0.5rem;
+        transform: translateY(-50%);
         i{
-            font-size: 2rem;
+            font-size: 1.2rem;
+        }
+        .el-icon-close{
+          width: 2rem;
+          height: 2rem;
+          line-height: 2rem;
+          text-align: center;
+          background-color: #cccccc;
+          color: #fff;
+          border-radius: 50%;
         }
     }
 }
 .shoppingcart_item_image{
-    margin: 0 0 0 1rem;
+    // margin: 0 0 0 1rem;
 }
 .shoppingcart_item_image img{
-    width: 10rem;
-    height: 10rem;
+    width: 8rem;
+    height: 8rem;
+    display: block;
+    object-fit: cover;
+    object-position: 50% 50%;
 }
 .shoppingcart_item_detail{
     margin: 0 0 0 1rem;
-    margin-right: 3.5rem;
+    margin-right: 2rem;
 }
 .shoppingcart_item_name,
 .shoppingcart_item_code,
 .shoppingcart_item_attr,
 .shoppingcart_item_price{
-    line-height: 2.5rem;
+    line-height: 2rem;
     font-size: 1.2rem;
     // width: 10rem;
+    color: #666666;
+    font-family: 'Poppins-Light';
 }
 .shoppingcart_item_price >div{
     font-size: 1.2rem;
@@ -276,6 +299,7 @@ export default class InsShoppingcart extends Vue {
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
+    margin-bottom: 0.8rem;
 }
 .shoppingcart_warrper{
     background-color: white;
@@ -283,22 +307,50 @@ export default class InsShoppingcart extends Vue {
     border-radius: .5rem;
     // min-height: calc(100vh - 402px);
     .shoppingcart_header{
+        // font-size: 2rem;
+        // line-height: 5rem;
+        // text-align: center;
+        // font-weight: 700;
+        // border-bottom: 1px solid #eee;
+        margin-bottom: 2rem;
+    }
+    .TitleBg{
+      width: 100%;
+      background-size: contain;
+      text-align: center;
+      position: relative;
+      .innerBox{
         font-size: 2rem;
-        line-height: 5rem;
-        text-align: center;
+        color: #aa1638;
+        letter-spacing: 1px;
+        padding-top: 2rem;
         font-weight: 700;
-        border-bottom: 1px solid #eee;
+      }
     }
 }
 .shoppingcart_total{
     text-align: right;
     padding: 1rem;
+    .el-button{
+      width: 100%;
+      height: 3rem;
+      // background: url('/images/mobile/CONTACT_btn.png') no-repeat center;
+      background-color: #aa1638;
+      background-size: cover;
+      padding: 0;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
 }
 .shoppingcart_total1{
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     text-align: right;
     padding: 1rem;
     color:#d92526;
+    span{
+      color: #999999;
+      font-size: 1.4rem;
+    }
 }
 .num-content{
     float: left;
@@ -314,6 +366,7 @@ export default class InsShoppingcart extends Vue {
   outline: none;
   border-left: 1px solid #e0e0e0;
   border-right: 1px solid #e0e0e0;
+  background-color: #ffffff;
 }
 .common-num {
   display: inline-block;
@@ -323,10 +376,12 @@ export default class InsShoppingcart extends Vue {
 .common-num a{
     float: left;
     width: 30px;
-    height: 30px;
-    line-height: 30px;
+    height: 32px;
+    line-height: 28px;
     text-align: center;
     font-size: 20px;
     color: #999999;
+    background-color: #f5f5f5;
+    font-weight: bold;
 }
 </style>

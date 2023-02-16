@@ -1,6 +1,8 @@
 <template>
   <div id="container">
-    <div class="DetailTitle"><img :src="ImgList" v-show="ImgList!==null"><div class="TitleBg"><div class="innerBoxText">{{$t('Forgetpassword.ForgetPassword')}}</div></div></div>
+    <div class="DetailTitle">
+      <!-- <img :src="ImgList" v-show="ImgList!==null"> -->
+      <div class="TitleBg"><div class="innerBoxText">{{$t('Forgetpassword.ForgetPassword')}}</div></div></div>
     <div class="maincontent forgetMain">
     <div class="ForgetPassMain">
       <div style="margin-top: 15px;" v-if="ResetPwd">
@@ -127,27 +129,23 @@ export default class InsForgetPassword extends Vue {
     width: 100%;
   }
   .TitleBg{
-    width: 500px;
-    border: 1px solid #ffffff;
-    height: 70px;
-    line-height: 70px;
-    margin: 0 auto;
-    padding: 10px;
-    margin-bottom: 20px;
-    top: 50%;
-    position: absolute;
-    transform: translateY(-50%);
-    .innerBoxText{
-      background:#ffffff;
-      color: #333333;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 40px;
-      font-weight: 700;
-      font-family: 'Arial';
-    }
+  width: 100%;
+  // height: 79px;
+  // background: url('/images/pc/titilebg.png') center no-repeat;
+  background-size: contain;
+  text-align: center;
+  position: relative;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  .innerBoxText{
+    font-size: 36px;
+    color: #aa1638;
+    // text-transform: uppercase;
+    // letter-spacing: 1px;
+    // padding-top: 44px;
+    font-weight: bold;
   }
+}
 }
 .forgetMain{
   background: #FFF;

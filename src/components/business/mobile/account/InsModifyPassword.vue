@@ -142,20 +142,20 @@ export default class InsModifyPassword extends Vue {
   font-size: 20px!important;
 }
 .MembercenterMobile .MemberInfoMain .el-form-item__label{
-    width: 25%;
+    width: 100%;
     float: left;
     color: #161616 !important;
     padding: 0px;
     padding-right: 10px;
     line-height: inherit;
-    height: 40px;
+    height: 3rem;
     display: flex;
     align-items: center;
-    justify-content: center;
-    text-align: center;
+    justify-content: left;
+    text-align: left;
 }
 .MembercenterMobile .MemberInfoMain .el-input{
-  width: 75%!important;
+  width: 100%!important;
 }
 .MembercenterMobile .MemberInfoMain .el-checkbox__label{
     display: inline-block;
@@ -197,18 +197,18 @@ export default class InsModifyPassword extends Vue {
     border:0px!important;
 }
 .MembercenterMobile .MemberInfoMain .el-input.is-disabled .el-input__inner{
-      border: 1px solid #535353!important;
-      background-color: transparent!important;
-      color:#161616!important;
-      border: none;
-      border-radius: 0px;
+      // border: 1px solid #535353!important;
+      // background-color: transparent!important;
+      // color:#161616!important;
+      // border: none;
+      // border-radius: 0px;
 }
 .MembercenterMobile .MemberInfoMain  .el-input__inner{
-      border: 1px solid #535353!important;
-      background-color: transparent!important;
-      color:#161616!important;
-      border: none;
-      border-radius: 0px;
+      // border: 1px solid #535353!important;
+      // background-color: transparent!important;
+      // color:#161616!important;
+      // border: none;
+      // border-radius: 0px;
 }
 .MembercenterMobile .MemberInfoMain .el-radio__input.is-checked .el-radio__inner{
     border-color: #333333;
@@ -218,22 +218,25 @@ export default class InsModifyPassword extends Vue {
   color: #606266;
 }
 .MembercenterMobile .MemberInfoMain .el-select{
-  width: 75%!important;
+  width: 100%!important;
 }
 .MembercenterMobile .MemberInfoMain .el-select >.el-input{
   width: 100%!important;
-  border: 1px solid #000;
+     border-radius: 4px;
+    border: 1px solid #DCDFE6;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 .MembercenterMobile .MemberInfoMain .el-select >.el-input .el-input__inner{
   border: 0px!important;
 }
 .MembercenterMobile .MemberInfoMain .el-select .el-input__suffix{
-  background: #333333;
-  color:#fff;
+  // background: #333333;
+  // color:#fff;
   right: 0px!important;
 }
 .MembercenterMobile .MemberInfoMain .el-select .el-input .el-select__caret{
-  color:#fff!important;
+  // color:#fff!important;
 }
 .MembercenterMobile .MemberInfoMain input::-webkit-input-placeholder {
         color:#999!important;

@@ -3,11 +3,11 @@
     <div class="ProducBanner">
       <ProductListSwiper
         class="innerBanner"
-        :TitleName="$t('product.Producttitle')"
       />
     </div>
     <div class="ProductSearch">
       <div class="SearchSlide">
+        <div class="drawer-bg" v-if="showSearchSlide"  @click="handleClickOutside"/>
         <div class="leftSide">
           <advancedSearch
             @advancedChange="advancedChange"
@@ -23,11 +23,11 @@
             <span class="el-icon-s-operation"></span
             ><b>{{ $t("product.Screening") }}</b>
           </li>
-          <li style="width: 810px;border: none;">
+          <li style="width: 800px;border: none;">
             {{ $t("product.Total") }} {{ totalRecord }}
             {{ $t("product.Product") }}
           </li>
-          <li style="width: 140px;">
+          <li>
             <select v-model="PriceItem" @change="getselect(PriceItem)">
               <option value="">{{ $t("product.Paixu") }}</option>
               <option value="desc">{{ $t("product.PriceHL") }}</option>
@@ -174,6 +174,10 @@ export default class InsProductSearch extends Vue {
     this.productSearch();
   }
 
+  handleClickOutside () {
+    this.closeSub();
+  }
+
   mounted() {
     // this.productSearch();
   }
@@ -269,6 +273,8 @@ export default class InsProductSearch extends Vue {
   .innerBanner {
     width: 100%;
     margin: 0 auto;
+    min-height: 200px;
+    z-index: 0;
     img {
       width: 100%;
     }
@@ -276,9 +282,8 @@ export default class InsProductSearch extends Vue {
 }
 .ProductSearch {
   .InsAdvancedSearch {
-    background: #fff;
+    background: transparent;
     height: 100vh;
-    overflow-y: scroll;
   }
 }
 .SearchSlide {
@@ -287,15 +292,23 @@ export default class InsProductSearch extends Vue {
   left: 0;
   top: 0px;
   bottom: 0px;
-  background: rgba(0, 0, 0, 0.6);
+  // background: rgba(0, 0, 0, 0.6);
   z-index: 999999;
   display: none;
   .leftSide {
-    width: 25%;
-    left: -25%;
-    min-height: 100%;
+    width: 400px;
+    left: -400px;
+    height: 100%;
     position: absolute;
     transition: all 0.5s;
+    background-color: #ebebeb;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    // overflow-y: scroll;
+    overflow: hidden;
+    box-shadow: 0 0 6px #999;
+    // overflow-x: scroll;
+    z-index: 999999;
   }
 }
 .ProductSearch {
@@ -337,15 +350,15 @@ export default class InsProductSearch extends Vue {
   width: 100%;
   margin: 0 auto;
   display: inline-block;
-  margin-top: 2rem;
+  // margin-top: 2rem;
   ul {
     width: 100%;
     margin: 0 auto;
   }
   li {
     float: left;
-    margin-right: 4%;
-    border: 1px solid #eee;
+    // margin-right: 4%;
+    border: 1px solid #ab1638;
     height: 40px;
     line-height: 40px;
     list-style: none;
@@ -353,20 +366,27 @@ export default class InsProductSearch extends Vue {
     justify-items: center;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
+    color: #999999;
     span {
       width: 20%;
       display: inline-block;
       font-size: 20px;
       text-align: center;
-      color: #909399;
+      color: #ab1638;
     }
     b {
-      width: 60%;
-      display: inline-block;
+      // width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       text-align: center;
       font-size: 16px;
       font-weight: 500;
-      color: #333333;
+      color: #ab1638;
+      img{
+        margin-right: 10px;
+      }
     }
     select {
       width: 100%;
@@ -374,13 +394,14 @@ export default class InsProductSearch extends Vue {
       padding-left: 0.5rem;
       height: 40px;
       line-height: 40px;
-      font-size: 14px;
+      font-size: 16px;
       -webkit-appearance: none;
       -moz-appearance: none;
       appearance: none;
       background: url(/images/mobile/arrow-down-back.png) 90% 17px no-repeat;
       background-size: auto;
       outline: none;
+      color: #ab1638;
       cursor: pointer;
     }
     &:last-child {
@@ -390,9 +411,25 @@ export default class InsProductSearch extends Vue {
       cursor: pointer;
     }
     &:first-child {
-      width: 140px;
+      width: 200px;
       cursor: pointer;
+      background: #fff !important;
+    }
+    &:last-child {
+      width: 200px;
+      cursor: pointer;
+      background: #fff !important;
     }
   }
+}
+.drawer-bg {
+  // background: #000;
+  // opacity: 0.3;
+  width: 100%;
+  top: 0;
+  height: 100%;
+  position: fixed;
+  z-index: 999;
+  background: rgba(0,0,0,.6);
 }
 </style>

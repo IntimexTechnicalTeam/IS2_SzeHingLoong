@@ -130,7 +130,7 @@ export default class InsBanner extends Vue {
   opacity: 1;
 }
 .pcbanner .swiper-pagination-bullet-active{
-  background: #666666!important;
+  background: #aa1638!important;
 }
 </style>
 <style scoped lang="less">
@@ -148,6 +148,7 @@ export default class InsBanner extends Vue {
 }
 .swiper-container-indexMain img {
   width: 100%;
+  display: block;
 }
 .faker{
   width: 100vw;

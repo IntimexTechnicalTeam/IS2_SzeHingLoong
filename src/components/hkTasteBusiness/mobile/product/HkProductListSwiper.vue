@@ -8,8 +8,8 @@
           <img :src="slide.Image" class="BannerImg">
         </swiperSlide>
         </swiper>
-        <div class="TitleBg"><div class="innerBoxText">{{TitleName}}</div></div>
     </div>
+    <div class="TitleBg"><div class="innerBoxText">{{TitleName}}</div></div>
   </div>
 </template>
 <script lang="ts">
@@ -19,7 +19,8 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper/src';
 export default class PkProductListSwiper extends Vue {
     hotProducts:any[]=[];
     bannerImg: string = '';
-    @Prop() private TitleName!: string;
+    // @Prop() private TitleName!: string;
+    TitleName:string = '';
     swiperOption: object = {
       pagination: {
         el: '.swiper-pagination',
@@ -28,6 +29,7 @@ export default class PkProductListSwiper extends Vue {
     };
     loadHotProducts () {
       this.$Api.promotion.getPromotion('PromProductList', 0).then((result) => {
+        this.TitleName = result.Promotion.Name;
         if (result.Promotion.BannerList.length > 0) {
           this.hotProducts = result.Promotion.BannerList;
         }
@@ -54,38 +56,35 @@ export default class PkProductListSwiper extends Vue {
 }
 </style>
 <style lang="less" scoped>
+.productSearchSwiper{
+  position: relative;
+}
+.productSearchSwiper{
+  min-height: 10rem;
+}
 .BannerImg{
     width: 100%;
     display: block;
 }
 .TitleBg{
-  width: 75%;
-  height: 4.5rem;
-  border:1px solid #ffffff;
+  // width: 500px;
+  // height: 70px;
+  // border:1px solid #ffffff;
   margin: 0 auto;
-  padding: 0.8rem;
+  padding: 10px;
+  // margin-bottom: 20px;
   position: absolute;
-  bottom: 10%;
+  top: 50%;
   left:50%;
   z-index: 999;
   transform: translateX(-50%) translateY(-50%);
   .innerBoxText{
-    width: 100%;
-    height: 100%;
-    background: #ffffff;
-    color: #333333;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    font-size: 2.5rem;
-    font-weight: 700;
-    font-family: 'Arial';
+    font-size: 2.4rem;
+    color: #aa1638;
+    // text-transform: uppercase;
+    // letter-spacing: 1px;
+    // padding-top: 44px;
+    font-weight: bold;
   }
 }
 </style>

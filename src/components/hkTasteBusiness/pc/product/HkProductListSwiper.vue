@@ -4,11 +4,12 @@
         <swiper :options="swiperOption" ref="mySwiper">
         <!-- slides -->
         <swiperSlide v-for="(slide, index) in hotProducts" :key="index">
-          <img :src="slide.Image" class="BannerImg">
+          <img :src="slide.Image" class="BannerImg" v-if="slide.Image">
         </swiperSlide>
         </swiper>
-        <div class="TitleBg"><div class="innerBoxText">{{TitleName}}</div></div>
+
     </div>
+    <div class="TitleBg"><div class="innerBoxText">{{TitleName}}</div></div>
   </div>
 </template>
 <script lang="ts">
@@ -18,7 +19,8 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper/src';
 export default class PkProductListSwiper extends Vue {
     hotProducts:any[]=[];
     bannerImg: string = '';
-    @Prop() private TitleName!: string;
+    // @Prop() private TitleName!: string;
+    TitleName:string = '';
     swiperOption: object = {
       pagination: {
         el: '.swiper-pagination',
@@ -27,6 +29,7 @@ export default class PkProductListSwiper extends Vue {
     };
     loadHotProducts () {
       this.$Api.promotion.getPromotion('PromProductList', 0).then((result) => {
+        this.TitleName = result.Promotion.Name;
         if (result.Promotion.BannerList.length > 0) {
           this.hotProducts = result.Promotion.BannerList;
         }
@@ -55,28 +58,24 @@ export default class PkProductListSwiper extends Vue {
     left: 50%;
 }
 .TitleBg{
-  width: 500px;
-  height: 70px;
-  border:1px solid #ffffff;
+  // width: 500px;
+  // height: 70px;
+  // border:1px solid #ffffff;
   margin: 0 auto;
   padding: 10px;
   margin-bottom: 20px;
   position: absolute;
-  bottom: 10%;
+  top: 50%;
   left:50%;
   z-index: 999;
   transform: translateX(-50%) translateY(-50%);
   .innerBoxText{
-    width: 100%;
-    height: 100%;
-    background:#ffffff;
-    color: #333333;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 40px;
-    font-weight: 700;
-    font-family: 'Arial';
+    font-size: 36px;
+    color: #aa1638;
+    // text-transform: uppercase;
+    // letter-spacing: 1px;
+    // padding-top: 44px;
+    font-weight: bold;
   }
 }
 </style>

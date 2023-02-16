@@ -1,42 +1,54 @@
 <template>
 <div class="header-layout"  v-cloak>
   <div class="headerBg">
-      <div class="headerTop">
-          <div class="inner">
-              <!-- 搜索框开始 -->
-              <div class="search-box">
-                <input type="text" v-model="key" class="inputBox" />
-                <span class="searchBtn" @click="searchFun(key)"></span>
-              </div>
-              <!--搜索框结束  -->
-              <!-- 会员登陆开始 -->
-              <InsLogin class="memberLogin"></InsLogin>
-              <!-- 我的喜爱开始 -->
-              <div class="cartTop">
-                  <router-link to="/account/MyFavorite">
-                          <i class="handle-icon fav-icon"></i>
-                  </router-link>
-              </div>
-              <!-- 我的喜爱结束 -->
-              <!-- 购物车开始 -->
-              <Shopcart class="memberLogin"></Shopcart>
-              <!-- 购物车结束 -->
-              <!-- 切换语言开始 -->
-              <CodeSelect/>
-              <div class="langBox">
-                  <InsLangSwitch></InsLangSwitch>
-              </div>
-              <!-- 切换语言结束 -->
+      <div class="headerTop fix">
+        <div class="header_logo">
+          <!-- logo开始 -->
+          <div class="logoBox">
+              <a href="/"><img class="logo1" src="/images/pc/logo2_JPG.png"> <img class="logo2" src="/images/pc/pcindex_09.png"></a>
           </div>
+          <!-- logo结束 -->
+        </div>
+        <div class="header_menu" >
+          <!-- 导航栏开始 -->
+          <Menu />
+          <!-- 导航栏结束 -->
+        </div>
+        <div class="inner" :class="{'menu_Eng': $Storage.get('locale') === 'E'}">
+
+            <!-- 我的喜爱开始 -->
+            <!-- <div class="cartTop">
+                <router-link to="/account/MyFavorite">
+                  <i class="handle-icon fav-icon"></i>
+                </router-link>
+            </div> -->
+            <!-- 我的喜爱结束 -->
+            <!-- 会员登陆开始 -->
+            <InsLogin class="memberLogin"></InsLogin>
+            <!-- 搜索框开始 -->
+            <div class="search" v-click-outside="closeDialog">
+                <a href="javascript:;" @click="isShowSearch = !isShowSearch"><img  src="/images/pc/searchbtn.png"></a>
+                <transition name="slide-fade">
+                    <div class="search-box" v-if="isShowSearch">
+                      <div>
+                        <span class="searchBtn" @click="searchFun(key)"></span>
+                        <input type="text" v-model="key" @keyup.enter="searchFun(key)" />
+                      </div>
+                    </div>
+                </transition>
+            </div>
+            <!--搜索框结束  -->
+            <!-- 购物车开始 -->
+            <Shopcart class="memberLogin"></Shopcart>
+            <!-- 购物车结束 -->
+            <!-- 切换语言开始 -->
+            <CodeSelect/>
+            <div class="langBox">
+                <InsLangSwitch></InsLangSwitch>
+            </div>
+            <!-- 切换语言结束 -->
+        </div>
       </div>
-      <!-- logo开始 -->
-      <div class="logoBox" v-if="!showInFixed">
-          <a href="/"><img src="/images/pc/pcindex_09.png"></a>
-      </div>
-      <!-- logo结束 -->
-      <!-- 导航栏开始 -->
-      <Menu />
-      <!-- 导航栏结束 -->
   </div>
 </div>
 </template>
@@ -61,6 +73,11 @@ export default class DefaultHeader extends Vue {
   @Prop() private showInFixed!: boolean;
 
   private key: string = '';
+  isShowSearch: boolean = false;
+
+  closeDialog () {
+    this.isShowSearch = false;
+  }
 
   getMenu () {
     this.$Api.promotion
@@ -89,6 +106,7 @@ export default class DefaultHeader extends Vue {
         path: '/product/search/-'
       });
     }
+    this.isShowSearch = false;
   }
   get currentlang () {
     return this.$i18n.locale;
@@ -138,68 +156,152 @@ export default class DefaultHeader extends Vue {
     width: 1200px;
     margin: 0 auto;
     padding-top: 10px;
-    height: 34px;
+    padding-bottom: 10px;
+    // height: 34px;
+    .header_logo{
+      float: left;
+    }
 }
+
 .headerTop .inner{
-    float: right;
-}
-.search-box {
-    border: 1px solid #808080;
-    width: 340px;
-    display: flex;
-    float: left;
+        float: right;
+        display: flex;
     align-items: center;
-    margin-right: 20px;
+    height: 68px;
+    }
+.headerTop .menu_Eng{
+  /deep/ .handle-icon span{
+    display: flex;
+    align-items: center;
+  }
 }
-.searchBtn{
-    width: 25px;
-    height: 25px;
-    display: inline-block;
-    background: url('/images/pc/pcindex_03.png') no-repeat center center;
-    background-size: 100%;
-    cursor: pointer;
-}
-.search-box .inputBox {
-    width: 305px;
-    float: left;
-    border:none;
-    background: transparent;
-    line-height: 30px;
-    text-indent: 10px;
-}
-.search-box  .btn-send {
-    position: absolute;
-    right: 10px;
-    top: 6px;
-    line-height: 1;
-    background: none;
-    border: none;
-    color: #555;
-}
-.search-box form {
-    position: relative;
-    font-size: 12px;
-}
-.search-box input {
-    font-family: inherit;
-    font-size: inherit;
-    font-style: inherit;
-    font-weight: inherit;
-    outline: 0;
-}
+.search {
+  position: relative;
+  margin: 0 15px;
+          // padding-right: 1rem;
+          // padding-left: 1rem;
+          img {
+            // width: 1.3rem;
+            height: 20px;
+            display: block;
+          }
+          .search-box {
+      position: absolute;
+      width: 340px;
+      z-index: 2;
+      // padding: 0 1.5rem;
+      box-sizing: border-box;
+      display: flex;
+      right: -60px;
+      top: 56px;
+
+      >div{
+        width: 100%;
+        position: relative;
+
+        .searchBtn{
+          width: 22px;
+          height: 22px;
+          display: inline-block;
+          background: url(/images/pc/searchbtn.png) no-repeat center center;
+          background-size: cover;
+          -ms-flex-negative: 0;
+          flex-shrink: 0;
+          cursor: pointer;
+          position: absolute;
+          top: 12px;
+          right: 12px;
+          &::before{
+            content: '';
+            width: 1px;
+            height: 30px;
+            background-color: #e6e6e6;
+            position: absolute;
+            left: -10px;
+            top: -2px;
+          }
+        }
+
+        input {
+          width: 100%;
+          height: 45px;
+          font-size: 14px;
+          color: #999999;
+          appearance: none;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          -ms-appearance:none;
+          outline: none;
+          border: 0;
+          background-repeat: no-repeat;
+          background-position-y: 4px;
+          padding: 0 45px 0 10px;
+          box-sizing: border-box;
+          background-color: transparent;
+          border-radius: 5px;
+          background-color: #fff;
+          box-shadow: 0px 2px 3px #e5ddd2;
+        }
+      }
+    }
+        }
+// .search-box {
+//     border: 1px solid #808080;
+//     width: 340px;
+//     display: flex;
+//     float: left;
+//     align-items: center;
+//     margin-right: 20px;
+// }
+// .searchBtn{
+//     width: 25px;
+//     height: 25px;
+//     display: inline-block;
+//     background: url('/images/pc/pcindex_03.png') no-repeat center center;
+//     background-size: 100%;
+//     cursor: pointer;
+// }
+// .search-box .inputBox {
+//     width: 305px;
+//     float: left;
+//     border:none;
+//     background: transparent;
+//     line-height: 30px;
+//     text-indent: 10px;
+// }
+// .search-box  .btn-send {
+//     position: absolute;
+//     right: 10px;
+//     top: 6px;
+//     line-height: 1;
+//     background: none;
+//     border: none;
+//     color: #555;
+// }
+// .search-box form {
+//     position: relative;
+//     font-size: 12px;
+// }
+// .search-box input {
+//     font-family: inherit;
+//     font-size: inherit;
+//     font-style: inherit;
+//     font-weight: inherit;
+//     outline: 0;
+// }
 .memberLogin{
     display: flex;
     float: left;
     align-items: center;
     position: relative;
-    margin-right: 10px;
+    // margin-right: 20px;
 }
 .cartTop{
     display: flex;
     float: left;
     align-items: center;
     position: relative;
-    margin-right: 10px;
+    margin-left: 20px;
 }
 .langBox{
     display: flex;
@@ -227,17 +329,24 @@ export default class DefaultHeader extends Vue {
 }
 .logoBox{
     width: 100%;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 40px;
+    // text-align: center;
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    // padding-top: 40px;
 }
 .logoBox a{
     display: flex;
+    align-items: center;
 }
-.logoBox a img{
-   width: 100%;
+.logoBox a img.logo1{
+   width: 61px;
+   display: block;
+   margin-right: 16px;
+}
+.logoBox a img.logo2{
+   width: 222px;
+   display: block;
 }
 
 .fav-icon {
@@ -251,52 +360,64 @@ export default class DefaultHeader extends Vue {
 // new css
 .header-layout {
  /deep/ .header_menu {
-   width: 1200px;
-   margin: 30px auto 10px;
-   > ul {
+  //  width: 1200px;
+  //  margin: 30px auto 10px;
+   float: left;
+
+  > ul {
      > li {
       float: left;
       display: flex;
       align-items: center;
       position: relative;
-      width: 14.28%;
-
+      width: auto;
+      padding: 0 26px;
       > a {
-        width: 100%;
-        font-size: 20px;
-        color: #666666;
+        // width: 100%;
+        font-size: 18px;
+        color: #333333;
         display: block;
         text-align: center;
         font-weight: 500;
-        text-transform: uppercase;
-        padding: 10px 5px;
+        text-transform: capitalize;
+        padding: 0;
+        width: auto;
+        line-height: 68px;
       }
 
       &:hover{
         > a  {
-          background: @base_color;
-          color: #fff;
+          // background: @base_color;
+          color: @base_color;
         }
       }
 
-      ul {
-        box-shadow: 0 0 5px #ccc;
-
-        li {
+      >ul {
+          box-shadow: 0 2px 5px #ccc;
+          width: 250px;
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          top: 100%;
+          // padding-top: 10px;
+        >li {
           border: 0;
           > a {
-            font-size: 18px;
-            color: #666666;
+            font-size: 16px;
+            color: #999999;
             display: block;
             text-align: center;
             font-weight: 500;
-            text-transform: uppercase;
-            padding: 10px 5px;
+            text-transform: capitalize;
+            // padding: 10px 5px;
+            // font-family: 'Poppins-Light';
           }
 
           &:hover{
              > a {
               background: @base_color;
+              // background: url('/images/pc/menubg.png');
+              // background-size: cover;
               color: #fff;
             }
           }
@@ -305,5 +426,26 @@ export default class DefaultHeader extends Vue {
      }
    }
  }
+ /deep/ .menu_Eng{
+  > ul > li {
+        padding: 0 22px;
+    > a{
+      font-size: 16px;
+    }
+  }
+ }
+}
+/* 可以设置不同的进入和离开动画 */
+/* 设置持续时间和动画函数 */
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active for below version 2.1.8 */ {
+  transform: translateY(-10px);
+  opacity: 0;
 }
 </style>

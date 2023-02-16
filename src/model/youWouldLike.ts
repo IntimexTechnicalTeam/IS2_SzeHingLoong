@@ -32,13 +32,13 @@ export default class YouWouldLike {
     this._Img_L = v;
   }
 
-  // private _AdditionalImage : string[];
-  // public get AdditionalImage() : string[] {
-  //   return this._AdditionalImage;
-  // }
-  // public set AdditionalImage(v : string[]) {
-  //   this._AdditionalImage = v;
-  // }
+  private _AdditionalImages : string = '';
+  public get AdditionalImages() : string {
+    return this._AdditionalImages;
+  }
+  public set AdditionalImages(v : string) {
+    this._AdditionalImages = v;
+  }
 
   private _Image : string = '';
   public get Image () : string {
@@ -160,6 +160,7 @@ export default class YouWouldLike {
     this._Img_L = src;
     this.IsFavorite = IsFavorite;
     this.HasStockAttrVal = HasStockAttrVal;
+    this._AdditionalImages = src;
   }
   _constructorArray (item:any) {
     if (item.id === undefined || item.src === undefined || item.title === undefined || item.productCode === undefined || item.primePrice === undefined || item.presentPrice === undefined) { throw new Error('params error : class YouWouldLike must contains src,title,productCode,primePrice,presentPrice,virtual'); }
@@ -174,5 +175,6 @@ export default class YouWouldLike {
     this.virtual = item.virtual;
     this.IsFavorite = item.IsFavorite;
     this._Img_L = item.src;
+    this._AdditionalImages = item.src;
   }
 }

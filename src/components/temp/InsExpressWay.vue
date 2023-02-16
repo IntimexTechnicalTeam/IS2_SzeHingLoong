@@ -803,6 +803,10 @@ export default class InsExpressWay extends Vue {
 .fare2_express{
     display: flex;
     padding: 0 20px;
+    /deep/ .in_select_main{
+      font-size: 16px;
+      box-sizing: border-box;
+    }
 }
 .expressWay_Warpper{
   border: 1px solid rgba(0, 0, 0, .1);

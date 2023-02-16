@@ -7,10 +7,10 @@
       onclick="window.open('http://www.facebook.com/share.php?u=' + window.location.href+'&t=' + document.title);"
       ><img src="/images/mobile/productDetail_02.png"
     /></a>
-    <!-- <a
+    <a
       onclick="window.open('https://lineit.line.me/share/ui?url='+window.location.href);"
       ><img src="/images/mobile/productDetail_04.png"
-    /></a> -->
+    /></a>
   </div>
 </template>
 <script lang="ts">

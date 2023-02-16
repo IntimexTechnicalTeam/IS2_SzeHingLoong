@@ -123,7 +123,7 @@ export default class InsBanner extends Vue {
   opacity: 1;
 }
 .mobileBanner .swiper-pagination-bullet-active{
-  background: #666666!important;
+  background: #aa1638 !important;
 }
 </style>
 <style scoped lang="less">
@@ -217,6 +217,7 @@ export default class InsBanner extends Vue {
 .swiper-slide {
   img {
     width: 100%;
+    display: block;
   }
 }
 </style>

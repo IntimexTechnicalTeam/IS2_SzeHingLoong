@@ -233,6 +233,9 @@ export default class Panel extends Vue {
     color: #fff;
     width: 35%!important;
 }
+.PcVersion .in_num_main{
+  display: block;
+}
 .PcVersion  .el-button{
   padding: 20px 10px!important;
 }
@@ -249,14 +252,21 @@ export default class Panel extends Vue {
 .PcVersion .in_panel_footer .actionBtn span{
   font-size: 18px;
 }
-.PcVersion  .in_num_label{
-  display: inline-block;
+.PcVersion .in_num_label{
+  // display: inline-block;
   width: auto!important;
-  margin-right: 1rem;
+  // margin-right: 1rem;
+  font-size: 24px;
+  color: #333333;
+  margin-bottom: 8px;
 }
 .PcVersion  .el-input-number{
-  border:none!important;
+  width: 140px !important;
+  border: 1px solid #e6e6e6;
   box-sizing: border-box;
+  border-radius: 1px;
+  height: 40px;
+  overflow: hidden;
 }
 .PcVersion  .el-input__inner{
   border:none!important;
@@ -264,28 +274,37 @@ export default class Panel extends Vue {
   width: 4rem;
 }
 .PcVersion  .el-input-number__decrease,.PcVersion .el-input-number__increase{
-    width: 2rem !important;
-    border: 1px solid #000;
-    border-radius: 5px;
-    height: 2rem;
-    line-height: 2rem;
+    width: 38px !important;
+    border: none;
+    border-radius: 0;
+    height: 38px;
+    line-height: 38px;
+    background-color: #f5f5f5;
+    margin-top: -1px;
+}
+.PcVersion  .el-input-number__decrease{
+  border-right: 1px solid #e6e6e6;
+  margin-left: -1px;
+}
+.PcVersion  .el-input-number__increase{
+  border-left: 1px solid #e6e6e6;
+  margin-right: -1px;
 }
 .PcVersion .el-input-number__decrease i, .el-input-number__increase i{
-  color:#000;
-}
-.PcVersion  .el-input-number{
-  width: auto!important;
+  color:#666666;
+  font-size: 14px;
+  font-weight: bold;
 }
 .PcVersion .el-input-number .el-input__inner{
   padding-left: 0rem;
   padding-right: 0rem;
   background: transparent!important;
-  width: 10rem;
-  line-height: 2rem!important;
-  height: 2rem!important;
-  color:#000!important;
-  font-weight: 500;
-  font-size: 1.4rem;
+  width: 138px;
+  line-height: 38px!important;
+  height: 38px!important;
+  color:#333333!important;
+  font-weight: bold;
+  font-size:16px;
 }
 </style>
 <style lang="less" scoped>

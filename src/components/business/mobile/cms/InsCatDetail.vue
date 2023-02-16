@@ -1,15 +1,24 @@
 <template>
-  <div id="container" class="catDetail">
-    <div class="DetailTitle">
-      <img :src="cmsCategory.ImagePath">
-      <div class="TitleBg">
+  <div id="container" class="catDetail" :class="{'catDetailback' : NewcateId == '50113'}">
+    <div class="DetailTitle"  v-if="NewcateId != '50113'">
+      <img :src="cmsCategory.ImagePath" v-if="cmsCategory.ImagePath">
+      <div class="TitleBg" v-else>
         <div class="innerBoxText">{{cmsCategory.Name}}</div>
       </div>
     </div>
 
     <div class="catContent">
         <template v-if="cmsCategory.PageStyle === '0' || cmsCategory.PageStyle === '1'">
-          <div v-html="cmsCategory.Content" class="layer"></div>
+          <div v-if="NewcateId == '50113'">
+            <div class="catCotent_text">
+              <div class="catCotent_title">{{cmsCategory.Name}}</div>
+              <div v-html="cmsCategory.Content" class="layer"></div>
+            </div>
+            <div class="background" :style="'background-image:url(' + cmsCategory.ImagePath + ')'"></div>
+          </div>
+          <div v-else>
+            <div v-html="cmsCategory.Content" class="layer"></div>
+          </div>
         </template>
 
         <ins-cat-layout2 :catData="cmsCatTree" :cmsData="contentList" @changeCatSelect="changeCatSelect" v-if="cmsCategory.PageStyle === '2'" />
@@ -42,12 +51,14 @@ export default class insNews extends Vue {
       pageSize: 10, // 每页显示条目个数
       totalRecord: 0 // 总条目数
     }
+    NewcateId: number = 0;
 
     // 根据设备类型获取CMSCategory信息
     getCategoryByDevice () {
       this.$Api.cms.getCategoryByDevice({ CatId: this.id, IsMobile: true }).then((result) => {
         this.cmsCategory = result;
         this.PageStyle = result.PageStyle;
+        this.NewcateId = result.Id;
 
         switch (result.PageStyle) {
             case '2':
@@ -158,27 +169,23 @@ export default class insNews extends Vue {
       width: 100%;
     }
     .TitleBg{
-      width: 75%;
-      border: 1px solid #ffffff;
-      height: 4.5rem;
-      line-height: 4.5rem;
-      margin: 0 auto;
-      padding: 10px;
-      margin-bottom: 20px;
-      top: 50%;
-      position: absolute;
-      transform: translateY(-50%);
-      .innerBoxText{
-        background:#ffffff;
-        color: #333333;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 2.5rem;
-        font-weight: 700;
-        font-family: 'Arial';
-      }
+    width: 100%;
+    // height: 4.5rem;
+    // background: url('/images/mobile/Mobile-back.png') center no-repeat;
+    background-size: contain;
+    text-align: center;
+    position: relative;
+    // margin-top: 2rem;
+    // margin-bottom: 2rem;
+    .innerBoxText{
+      font-size: 2.4rem;
+      color: #aa1638;
+      // text-transform: uppercase;
+      // letter-spacing: 1px;
+      padding-top: 2rem;
+      font-weight: bold;
     }
+  }
   }
 
   .catContent {
@@ -189,6 +196,54 @@ export default class insNews extends Vue {
 
     .layer {
       font-size: 1.2rem;
+    }
+  }
+}
+.catDetailback{
+  background-color: #f2d5ce;
+
+  .catCotent_text{
+    min-height: 30rem;
+    width: 100%;
+    margin: 0 auto;
+
+    padding-top: 6.5rem;
+    padding-left: 2rem;
+    box-sizing: border-box;
+    .catCotent_title{
+      font-size: 32px;
+      // line-height: 1.3rem;
+      color: #000;
+      position: relative;
+      margin-bottom: 2rem;
+      &::after{
+        content: '';
+        width: 30px;
+        height: 5px;
+        background-color: #000;
+        position: absolute;
+        left: 0;
+        bottom: -10px;
+      }
+    }
+    .layer{
+      /deep/ p{
+        font-size: 16px;
+        color: #000;
+        line-height: 30px;
+      }
+    }
+  }
+  .catContent{
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    .background{
+      width: 100%;
+      height: 338px;
+      // background-attachment: fixed;
+      background-repeat: no-repeat;
+      background-position: center;
     }
   }
 }

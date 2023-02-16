@@ -62,7 +62,7 @@
               >
                 <Option :value="1" :label="$t('Register.UserLanguageT')">{{$t('Register.UserLanguageT')}}</Option>
                 <Option :value="0" :label="$t('Register.UserLanguageE')">{{$t('Register.UserLanguageE')}}</Option>
-                <Option :value="2" :label="$t('Register.UserLanguageS')">{{$t('Register.UserLanguageS')}}</Option>
+                <!-- <Option :value="2" :label="$t('Register.UserLanguageS')">{{$t('Register.UserLanguageS')}}</Option> -->
               </Select>
             </FormItem>
             <FormItem>
@@ -242,16 +242,14 @@ export default class InsMemberInfo extends Vue {
 }
 </script>
 <style lang="less">
-.messageboxNoraml{
-  z-index: 1000000000!important;
-}
-</style>
-<style lang="less">
 #container .el-form-item__content{
   text-align: left!important;
 }
 .MemberPc .MemberInfoMain .el-button--primary span{
   font-size: 20px!important;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  line-height: 50px;
 }
 .MemberPc  .el-checkbox__label{
     display: inline-block;
@@ -265,14 +263,14 @@ export default class InsMemberInfo extends Vue {
   white-space: unset;
 }
 .MemberPc .el-form{
-  width: 80%;
+  width: 540px;
   margin: 0 auto;
 }
 .MemberPc .el-form .el-input{
-  width: 60%!important;
+  width: 100%!important;
 }
 .MemberPc .el-form .el-select{
-  width: 60%!important;
+  width: 100%!important;
 }
 .MemberPc .el-form .el-select .el-input{
     width: 100%!important;
@@ -282,28 +280,51 @@ export default class InsMemberInfo extends Vue {
     background: #333333;
 }
 .MemberPc .el-form .el-form-item__label{
-    width: 25%;
+    width: 100%;
     float: left;
-    color: #161616 !important;
+    color: #999999 !important;
     padding: 0px;
-    padding-right: 10px;
+    // padding-right: 10px;
     line-height: inherit;
-    height: 40px;
+    // height: 40px;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    padding-right: 10px;
+    justify-content: left;
+    // padding-right: 10px;
+    margin-bottom: 10px;
 }
 .MemberPc .el-select .el-input__suffix{
-  background: #333333;
-  color:#fff;
-  right: 0px!important;
+  background: transparent;
+  color:#ab1638;
+  // right: 0px!important;
 }
 .MemberPc .el-select .el-input .el-select__caret{
-  color:#fff!important;
+  color:#ab1638!important;
+  font-size: 14px;
+  font-weight: bold;
 }
 .MemberPc .el-form-item__error{
-      left: 25%;
+  left: 0;
+}
+.MemberPc .MemberInfoMain .el-input__inner:focus{
+  border: 1px solid #ab1638!important;
+}
+.MemberPc .MemberInfoMain .el-radio__input.is-checked .el-radio__inner{
+    border-color: #ab1638;
+    background: #fff;
+}
+.MemberPc .MemberInfoMain .is-checked .el-radio__inner{
+  border-color: #ab1638;
+  background: #fff;
+}
+.MemberPc .MemberInfoMain .is-checked .el-radio__inner::after{
+  width: 8px;
+  height: 8px;
+  border-radius: 100%;
+  background-color: #ab1638;
+}
+.MemberPc .MemberInfoMain .el-radio__input.is-checked+.el-radio__label{
+  color: #ab1638;
 }
 </style>
 <style lang="less" scoped>
@@ -338,5 +359,6 @@ export default class InsMemberInfo extends Vue {
     width: 60%;
     float: left;
     margin-left: 25%;
+    padding: 0;
 }
 </style>

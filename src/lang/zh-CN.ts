@@ -135,7 +135,10 @@ export default {
     Total: '共',
     Product: '個產品',
     ProductDetail: '產品詳情',
-    Unit: '單位'
+    Unit: '單位',
+    PutawayL: '收起',
+    More: '更多',
+    ViewAll: '查看全部'
   },
   Shoppingcart: {
     ShoppingcartTitle: '購物車',
@@ -151,6 +154,7 @@ export default {
     None: '購物車沒有商品，請即登錄選購',
     more: '更多',
     hide: '收起',
+    SubTotal: '小計',
     ProceedToCheckout: '進行結算'
   },
   Login: {
@@ -172,7 +176,8 @@ export default {
     Already: '已經有一個帳戶？',
     Signinnow: '立即登錄',
     onlineaccount: '沒有在線帳戶？',
-    Signin: '登入'
+    Signin: '登入',
+    Loginregistration: '登入/註冊'
   },
   Register: {
     RegisterTitle: '註冊會員',
@@ -323,7 +328,7 @@ export default {
     DeliveryCharge: '運輸費用',
     TotalPrice: '總價',
     OrderStatus: '訂單狀態',
-    OrderDateTime: '訂單日期及時間 ',
+    OrderDateTime: '訂單日期及時間',
     OrderNumber: '訂單編號',
     OrderSearch: '訂單搜索',
     EnterProductName: '請輸入產品名稱',
@@ -376,7 +381,7 @@ export default {
     SubTotal: '商品小計',
     PayBy: '支付方式',
     Couponcode: '優惠碼',
-    confirm: '保存地址',
+    confirm: '確認',
     Total: '共',
     BacktoShoppingCart: '返回購物車',
     Last: '上一頁',
@@ -461,7 +466,9 @@ export default {
     BusinessHours: '營業時間',
     BigSales: '熱銷產品',
     WhatNews: '今期流行',
-    PlsChoose: '請點擊選擇您想要查看的內容：'
+    PlsChoose: '請點擊選擇您想要查看的內容：',
+    More: '更多',
+    discounts: '今期優惠產品'
   },
   promotion: {
     enter: '點擊進入',

@@ -11,7 +11,7 @@
     <div class="productDetail_main">
       <inPreview style="width:50%" :imgList="ImgList" :pageNum="userAgent === 'mobile' ?  1 : 4" :ProductTitleName="ProductTitleName"></inPreview>
       <div style="width:45%;margin-left:5%;float:right;">
-          <PkProductInfo :panelDetail.sync="PanelDetail"  :ProductSku="ProductCode" width="100%" :AddPrice="getNewsPrice" style="margin-top:4rem;margin-bottom: 2rem;"></PkProductInfo>
+          <PkProductInfo :panelDetail.sync="PanelDetail"  :ProductSku="ProductCode" width="100%" :AddPrice="getNewsPrice" style="margin-top:2rem;"></PkProductInfo>
           <div class="ProductRate"><Rate  v-model="Score" disabled  disabled-void-color="#5f6548" disabled-void-icon-class="el-icon-star-off"></Rate></div>
           <PkProductDetailCate :source="ExtAttrList" :cateTree="CatalogTree"  width="100%" style="margin-top:2rem;"></PkProductDetailCate>
           <inPanel :panelDetail.sync="PanelDetail" :ProductSku="ProductCode" @getPrice="showPrice" width="100%"></inPanel>
@@ -190,29 +190,32 @@ export default class InsProductDetail extends Vue {
     height: 3rem;
     .huge{
       display: inline-block;
-      &:nth-child(1){
-        font-size: 1.6rem;
-      }
-      &:nth-child(2){
-        font-size:2rem;
+      font-size:24px;
         color:#b40606;
         font-weight: 700;
-      }
+      // &:nth-child(1){
+      //   font-size: 1.6rem;
+      // }
+      // &:nth-child(2){
+
+      // }
     }
   }
   .primePricesMain{
     .huge{
       display: inline-block;
-      &:nth-child(1){
-        font-size: 1rem;
+      font-size: 16px;
         color: #999;
         text-decoration: line-through;
-      }
-      &:nth-child(2){
-        font-size: 1rem;
-        color: #999;
-        text-decoration: line-through;
-      }
+        margin-bottom: 10px;
+      // &:nth-child(1){
+      //   font-size: 1rem;
+      //   color: #999;
+      //   text-decoration: line-through;
+      // }
+      // &:nth-child(2){
+
+      // }
     }
   }
 }
@@ -254,8 +257,8 @@ export default class InsProductDetail extends Vue {
 }
 .isActive{
   color:#FFF!important;
-  background: #262626 !important;
-  border:1px solid #262626;
+  background: #aa1638 !important;
+  border:1px solid #aa1638;
 }
 .productDetail_container {
   margin:0 auto;
@@ -274,17 +277,17 @@ export default class InsProductDetail extends Vue {
         font-size: 20px;
         padding-top: 1rem;
         padding-bottom: 1rem;
-        border:1px solid #000;
+        border:1px solid #aa1638;
         float: left;
         margin-right:24px;
         cursor: pointer;
         background: #FFF;
         border-radius: 5px;
-        color:#000;
+        color:#aa1638;
       }
       .comment_title{
-        border:1px solid #000;
-        color:#000;
+        border:1px solid #aa1638;
+        color:#aa1638;
         cursor: pointer;
       }
     }

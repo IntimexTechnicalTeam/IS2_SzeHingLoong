@@ -1,7 +1,28 @@
 <template>
-  <div class="news">
-    <h2>{{$t('home.News')}}</h2>
-    <ul>
+  <div class="news fade-in">
+    <div class="TitleBg"><div class="innerBox">{{ContentsName}}</div></div>
+    <div class="swiper_news">
+      <swiper class="swiperOptionNews" :options="swiperOptionNews" v-if="lastestContents.length>0">
+      <!-- slides -->
+      <swiperSlide class="fade-in" v-for="(slide, index) in lastestContents" :key="index">
+          <router-link :to="'/cms/content/'+slide.Id">
+            <img :src="slide.Cover" class="NewsPart" />
+          </router-link>
+          <p class="news-title">{{slide.Title}}</p>
+      </swiperSlide>
+      </swiper>
+      <!-- Optional controls -->
+      <!-- <div class="swiper-pagination swiper-pagination-banner" slot="pagination"></div> -->
+      <div
+        class="swiper-button-prev swiper-button-prev-News"
+        slot="button-prev"
+      ></div>
+      <div
+        class="swiper-button-next swiper-button-next-News"
+        slot="button-next"
+      ></div>
+    </div>
+    <!-- <ul>
       <li v-for="(n,index) in lastestContents" :key="index">
         <router-link :to="'/cms/content/'+n.Id">
           <img :src="n.Cover" class="NewsPart" />
@@ -9,22 +30,34 @@
         <p class="news-date">{{n.CreateDate}}</p>
         <p class="news-title">{{n.Title}}</p>
       </li>
-    </ul>
-    <p class="more">
+    </ul> -->
+    <!-- <p class="more">
       <a href="#">{{$t('home.More')}}></a>
-    </p>
+    </p> -->
   </div>
 </template>
 <script lang="ts" scoped>
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
-@Component
+import { swiper, swiperSlide } from 'vue-awesome-swiper/src';
+@Component({ components: { swiper, swiperSlide } })
 export default class PkNews extends Vue {
   lastestContents: any[] = [];
+  ContentsName: string = '';
+  swiperOptionNews: object = {
+    slidesPerView: 2,
+    spaceBetween: 20,
+    navigation: {
+      nextEl: '.swiper-button-next.swiper-button-next-News',
+      prevEl: '.swiper-button-prev.swiper-button-prev-News'
+    },
+    observer: true,
+    observeParents: true
+  };
   getNews () {
     var cond = {
       Page: 1,
-      PageSize: 3,
-      catId: 10029
+      PageSize: 2,
+      catId: 40113
     };
     this.$Api.cms.getLastestContents(cond).then(result => {
       result.Data.forEach(function (item) {
@@ -34,10 +67,30 @@ export default class PkNews extends Vue {
         );
       });
       this.lastestContents = result.Data;
+      this.ContentsName = result.Data[0].Category.Name;
     });
+  }
+  NEWScroll () {
+    let fadeInElements = document.getElementsByClassName('fade-in');
+    for (var i = 0; i < fadeInElements.length; i++) {
+      let elem = fadeInElements[i] as HTMLElement;
+      if (this.isElemVisible(elem)) {
+        elem.style.opacity = '1';
+      }
+    }
+  }
+  isElemVisible (el) {
+    var rect = el.getBoundingClientRect();
+    var elemTop = rect.top + 250; // 200 = buffer
+    var elemBottom = rect.bottom;
+    return elemTop < window.innerHeight && elemBottom >= 0;
   }
   mounted () {
     this.getNews();
+  document.addEventListener('scroll', this.NEWScroll);
+  }
+  destroyed () {
+    document.removeEventListener('scroll', this.NEWScroll);
   }
 }
 </script>
@@ -46,9 +99,81 @@ export default class PkNews extends Vue {
 .news {
   width: 100%;
   /*height:800px;*/
-  padding-bottom: 150px;
-  padding-top: 160px;
+  padding-bottom: 40px;
+  padding-top: 40px;
   box-sizing: border-box;
+  .TitleBg{
+  width: 100%;
+  // height: 79px;
+  // background: url('/images/pc/titilebg.png') center no-repeat;
+  background-size: contain;
+  text-align: center;
+  position: relative;
+  .innerBox{
+    font-size: 30px;
+    color: #aa1638;
+    // text-transform: uppercase;
+    font-weight: bold;
+    // letter-spacing: 1px;
+    // padding-top: 44px;
+  }
+}
+  .swiper_news{
+    width: 1200px;
+    margin: 0 auto;
+    margin-top: 40px;
+    position: relative;
+    .swiperOptionNews{
+      width: 1080px;
+      padding: 6px;
+      margin: 0 auto;
+      /deep/ .swiper-slide{
+        a{
+          width: 100%;
+          height: 253px;
+          box-shadow: 0 0 5px #efeded;
+          border-radius: 3px;
+          overflow: hidden;
+          display: block;
+        }
+        img{
+          width: 100%;
+          height: 100%;
+          display: block;
+          object-fit: cover;
+          object-position: 50% 50%;
+          border: 6px solid #fff;
+          box-sizing: border-box;
+        }
+      }
+      .news-title{
+        text-align: center;
+        font-size: 18px;
+        color: #666666;
+        margin-top: 20px;
+      }
+    }
+    .swiper-button-prev, .swiper-button-next{
+      margin-top: -3rem;
+    }
+    .swiper-button-next-News{
+        width: 16px;
+        height: 28px;
+        background: url('/images/mobile/right.png') no-repeat right;
+      }
+      .swiper-button-prev-News{
+        width: 16px;
+        height: 28px;
+        background: url('/images/mobile/left.png') no-repeat left;
+      }
+  }
+  .fade-in {
+      opacity: 0;
+      transition: 0.5s all ease-out;
+      // transform: translate(0, 30px);
+      box-sizing: border-box;
+      display: inline-block;
+    }
 }
 .news h2 {
   font-size: 28px;
@@ -122,4 +247,11 @@ export default class PkNews extends Vue {
   font-size: 16px;
   float: right;
 }
+.fade-in {
+      opacity: 0;
+      transition: 0.5s all ease-out;
+      // transform: translate(0, 30px);
+      box-sizing: border-box;
+      display: inline-block;
+    }
 </style>

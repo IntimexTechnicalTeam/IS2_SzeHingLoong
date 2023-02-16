@@ -236,40 +236,57 @@ export default class InsPanel extends Vue {
 .in_panel_footer .actionBtn span{
   font-size: 1.6rem;
 }
-.in_panel_warpper .in_num_label{
+.in_panel_warpper.mobileWarper .in_num_label{
   display: inline-block;
   width: auto!important;
   margin-right: 1rem;
 }
-.in_panel_warpper .el-input-number{
-  border:none!important;
+.in_panel_warpper.mobileWarper .el-input-number{
+  border:1px solid #e6e6e6!important;
   box-sizing: border-box;
 }
-.in_panel_warpper .el-input__inner{
+.in_panel_warpper.mobileWarper .el-input__inner{
   border:none!important;
   box-sizing: border-box;
   width: 4rem;
 }
-.in_panel_warpper .in_num_main .el-input-number__decrease, .in_panel_warpper .in_num_main .el-input-number__increase{
-    width: 2.5rem!important;
-    border: 1px solid #000;
-    border-radius: 5px;
-    height: 2.5rem;
-    line-height: 2.5rem;
+.in_panel_warpper.mobileWarper .in_num_main .el-input-number__decrease, .in_panel_warpper.mobileWarper .in_num_main .el-input-number__increase{
+    width: 3rem!important;
+    // border-right: 1px solid #e6e6e6;
+    border-radius: 0;
+    height: 38px;
+    line-height: 38px;
+    background-color: #f5f5f5;
 }
-.in_panel_warpper .in_num_main .el-input-number__decrease i, .in_panel_warpper .in_num_main .el-input-number__increase i{
-  color:#000;
+.in_panel_warpper.mobileWarper .in_num_main .el-input-number__decrease{
+  margin-right: 1px solid #e6e6e6;
+  left: 0;
+  top: 0;
 }
-.in_panel_warpper  .el-input-number{
+.in_panel_warpper.mobileWarper .in_num_main .el-input-number__increase{
+  margin-left: 1px solid #e6e6e6;
+  top: 0;
+  right: 0;
+}
+.in_panel_warpper.mobileWarper .in_num_main .el-input-number__decrease i, .in_panel_warpper.mobileWarper .in_num_main .el-input-number__increase i{
+  color:#666666;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.el-input{
+  font-size: 1.2rem;
+}
+.in_panel_warpper.mobileWarper .el-input-number{
   width: auto!important;
+  height: 40px !important;
 }
-.in_panel_warpper .el-input-number .el-input__inner{
+.in_panel_warpper.mobileWarper .el-input-number .el-input__inner{
   padding-left: 0rem;
   padding-right: 0rem;
-  background: transparent!important;
-  width: 10rem;
-  line-height: 2.5rem!important;
-  height: 2.5rem!important;
+  background: transparent !important;
+  width: 11rem;
+  line-height: 36px !important;
+  height: 38px !important;
   color:#000!important;
   font-weight: 500;
   font-size: 1.4rem;
@@ -278,7 +295,12 @@ export default class InsPanel extends Vue {
   .in_num_warpper{
     margin-top: 1rem;
     .in_num_label{
-      color:#666666;
+      color:#707070;
+      width: 100%;
+      display: block;
+      line-height: normal;
+      margin: 0;
+      margin-bottom: 0.5rem;
     }
   }
   .in_panel_footer {
@@ -289,11 +311,12 @@ export default class InsPanel extends Vue {
       display: inline-flex;
       justify-content: center;
       align-items: center;
-      background-color: #333333;
+      background: url('/Images/mobile/buynow_btn.png') no-repeat top center;
+      background-size: cover;
+      width: 48%;
       color: #fff;
       border-radius: 3px;
       margin-bottom: 1rem;
-      border:1px solid #333333;
       text-transform: uppercase;
       width: 48%;
       float: left;
@@ -311,19 +334,19 @@ export default class InsPanel extends Vue {
       .BuyBtn{
       height: 3.5rem;
       font-size:1.4rem;
-      color: #333333;
       display: inline-flex;
       justify-content: center;
       align-items: center;
-      background-color: #333333;
+      background: url('/Images/mobile/buynow_btn.png') no-repeat top center;
+      background-size: cover;
+      width: 48%;
       color: #fff;
       border-radius: 3px;
       margin-bottom: 1rem;
-      border:1px solid #333333;
       text-transform: uppercase;
-      width: 48%;
-      float: left;
-      margin-left: 4%;
+
+      // float: left;
+      // margin-left: 4%;
         &:disabled{
           cursor:not-allowed;
           background: #ccc;
@@ -341,21 +364,19 @@ export default class InsPanel extends Vue {
       display: inline-flex;
       justify-content: center;
       align-items: center;
-      background-color: #333333;
+      // background-color: #333333;
       color: #fff;
       border-radius: 3px;
       margin-bottom: 1rem;
-      border:1px solid #333333;
+      // border:1px solid #333333;
       text-transform: uppercase;
-      width: 48%;
-      float: left;
-      margin-left: 4%;
+      width: 49%;
       span{
-        font-size:1.4rem;
+        font-size:1.3rem;
       }
-      &:first-child {
-        margin-left: 0px!important;
-      }
+      // &:first-child {
+      //   margin-left: 4%!important;
+      // }
     }
   }
 }
@@ -413,7 +434,7 @@ export default class InsPanel extends Vue {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin-top: 1.6rem;
+  // margin-top: 1.6rem;
 }
 
 .productDetail_price_warpper {

@@ -24,12 +24,14 @@
     >
       <b v-if="shopCart.Qty">{{shopCart.Qty}}22333333</b>
     </a> -->
-    <div class="top-cart-detail top-window" :class="{ showCart: isShow }">
+    <transition name="slide-fade">
+      <div class="top-cart-detail top-window" v-show="isShow">
       <div class="window-detail-title">
         <span>{{ $t("Shoppingcart.ShoppingcartTitle") }}</span>
       </div>
       <div class="cart-window-content" v-if="shopCart.Qty">
-        <table>
+        <div id="style-4" class="scrollbar">
+          <table>
           <tr>
             <th>{{ $t("Shoppingcart.Product") }}</th>
             <th>{{ $t("Shoppingcart.Quantity") }}</th>
@@ -37,20 +39,22 @@
             <th></th>
           </tr>
           <tr v-for="(one, index) in shopCart.Items" :key="index">
-            <td class="window-cart-pic"  style="display: block;text-align: center;">
-              <a href="/">
-                <img :src="one.Product.Img_M" />
-              </a>
-              <p style="font-size:16px;">{{ one.Product.Name }}</p>
-              <p v-if="one.AttrName1" class="attrList">
-                {{ one.AttrTypeName1 }}：{{ one.AttrName1 }}
-              </p>
-              <p v-if="one.AttrName2" class="attrList">
-                {{ one.AttrTypeName2 }}：{{ one.AttrName2 }}
-              </p>
-              <p v-if="one.AttrName3" class="attrList">
-                {{ one.AttrTypeName3 }}：{{ one.AttrName3 }}
-              </p>
+            <td class="window-cart-pic">
+              <router-link class="product-img" :to="'/product/Detail/'+one.Product.Sku">
+                  <img :src="one.Product.Img_M" />
+              </router-link>
+              <div class="text">
+                <p class="name">{{ one.Product.Name }}</p>
+                <p v-if="one.AttrName1" class="attrList">
+                  {{ one.AttrTypeName1 }}：{{ one.AttrName1 }}
+                </p>
+                <p v-if="one.AttrName2" class="attrList">
+                  {{ one.AttrTypeName2 }}：{{ one.AttrName2 }}
+                </p>
+                <p v-if="one.AttrName3" class="attrList">
+                  {{ one.AttrTypeName3 }}：{{ one.AttrName3 }}
+                </p>
+              </div>
             </td>
             <td width="60" class="window-cart-num">{{ one.Qty }}</td>
             <td width="120" class="window-cart-price">
@@ -62,6 +66,7 @@
             </td>
           </tr>
         </table>
+        </div>
 
         <p class="cartSubtotal">
           {{ $t("Shoppingcart.Total") }}:
@@ -82,6 +87,8 @@
       </div>
       <div class="cart-close" @click="closeDialog()"><span>+</span></div>
     </div>
+    </transition>
+
   </div>
 </template>
 
@@ -131,10 +138,11 @@ export default class InsShoppingCart extends Vue {
     return this.$route.path;
   }
   mounted() {
-    this.$store.dispatch(
-      'setShopCart',
-      this.$Api.shoppingCart.getShoppingCart()
-    );
+    // this.$store.dispatch(
+    //   'setShopCart',
+    //   this.$Api.shoppingCart.getShoppingCart()
+    // );
+    this.getShopCart();
   }
   get shopCarts() {
     return this.$store.state.shopCart;
@@ -220,8 +228,8 @@ export default class InsShoppingCart extends Vue {
 /*头部购物车弹框 css*/
 .handle-icon {
   display: block;
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   color: #cccccc;
   -webkit-transition-duration: 0.1s;
   transition-duration: 0.1s;
@@ -261,16 +269,16 @@ export default class InsShoppingCart extends Vue {
 }
 
 .top-cart-detail {
-  display: none;
+
   position: fixed;
-  top: 0px;
-  right: -480px;
-  width: 480px;
+  top: 0;
+  right: 0;
+  width: 600px;
   background-color: #f6f6f6;
   overflow: auto;
   overflow-x: hidden;
   padding-bottom: 30px;
-  border: 1px solid #eee;
+  // border: 1px solid #eee;
   transition: all 1s;
 }
 
@@ -370,11 +378,41 @@ export default class InsShoppingCart extends Vue {
 .window-cart-num,
 .window-cart-price {
   color: #dc1010;
+  font-size: 14px;
 }
-
+.window-cart-pic{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  p{
+    color: #636363;
+    font-size: 14px;
+    text-align: left;
+  }
+  .product-img{
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+  }
+  .text{
+    .name{
+      color: #636363;
+      font-size: 14px;
+      text-align: left;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      word-break: break-word;
+      margin-left: 5px;
+}
+  }
+}
 .window-cart-pic img {
-  border: 1px solid #f0f0f0;
-  width: 68px;
+  // border: 1px solid #f0f0f0;
+  width: 100px;
+  display: block;
+  box-sizing: border-box;
 }
 
 .cartSubtotal {
@@ -410,8 +448,35 @@ export default class InsShoppingCart extends Vue {
   background: @base_color;
 }
 .cart-window-content {
-  overflow-x: hidden;
-  max-height: 500px;
-  overflow-y: scroll;
+  .scrollbar{
+    max-height: 540px;
+    overflow: auto;
+    overflow-x: hidden;
+  }
+}
+#style-4::-webkit-scrollbar-track {
+  // box-shadow:inset 0 0 3px rgba(212,121,77,1);
+  background-color: transparent;
+}
+#style-4::-webkit-scrollbar {
+  width: 5px;
+  background-color: transparent;
+}
+#style-4::-webkit-scrollbar-thumb {
+  background-color: rgba(168, 20, 53, 1);
+  // border: 2px solid rgba(0, 0, 0, 0.3);
+}
+/* 可以设置不同的进入和离开动画 */
+/* 设置持续时间和动画函数 */
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active for below version 2.1.8 */ {
+  transform: translateY(-10px);
+  opacity: 0;
 }
 </style>

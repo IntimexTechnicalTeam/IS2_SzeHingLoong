@@ -1,13 +1,18 @@
 <template>
     <div class="InsAdvancedSearch">
-      <p class="resetTitle">{{$t('product.Screening')}}<span class="el-icon-close" @click="closeSub"></span></p>
-       <p class="resetAll" @click="resetAll">{{$t('product.Resetall')}}</p>
-        <ul class="attrSearch" v-if="init">
-          <ReSearchItem v-for="(attr, index) in attrList" :key="index" :searchGroup="attr" :defaultSelected="deAttrGIds.indexOf(attr.Id) !== -1 ? selectedAttrs[deAttrGIds.indexOf(attr.Id)].Vals : []"  @changeSelect="changeAttrSelect" />
-        </ul>
+      <div class="resetbox">
+        <p class="resetTitle">{{$t('product.Screening')}}<span class="el-icon-close" @click="closeSub"></span></p>
+        <p class="resetAll" @click="resetAll">{{$t('product.Resetall')}}</p>
+      </div>
+      <div id="style-4" class="scrollbar">
         <ul class="catSearch" v-if="init">
           <ReSearchItem v-for="(cat, index) in catalogs" :key="index" :searchGroup="cat" :defaultSelected="deCatGIds.indexOf(cat.Id) !== -1 ? selectedCats[deCatGIds.indexOf(cat.Id)].Vals : []" :searchType="2"  @changeSelect="changeCatSelect" />
         </ul>
+        <ul class="attrSearch" v-if="init">
+          <ReSearchItem v-for="(attr, index) in attrList" :key="index" :searchGroup="attr" :defaultSelected="deAttrGIds.indexOf(attr.Id) !== -1 ? selectedAttrs[deAttrGIds.indexOf(attr.Id)].Vals : []"  @changeSelect="changeAttrSelect" />
+        </ul>
+      </div>
+
     </div>
 </template>
 <script lang="ts">
@@ -117,36 +122,36 @@ export default class InsAdvancedSearch extends Vue {
         菜单点击产品库存属性选中任意一个，产品目录全选中，
         菜单点击产品目录选中任意一个，产品库存属性全选中
       */
-      if (!this.routerType && this.selectedAttrs.length) {
-        this.selectedCats = [];
+      // if (!this.routerType && this.selectedAttrs.length) {
+      //   this.selectedCats = [];
 
-        this.catalogs.forEach((element, i) => {
-          this.deCatGIds.push(element.Id);
-          this.selectedCats.push({
-            Id: element.Id,
-            Vals: []
-          });
+      //   this.catalogs.forEach((element, i) => {
+      //     this.deCatGIds.push(element.Id);
+      //     this.selectedCats.push({
+      //       Id: element.Id,
+      //       Vals: []
+      //     });
 
-          element.Children.forEach(item => {
-            this.selectedCats[i].Vals.push(item.Id);
-            this.paramCats.push(item.Id);
-          });
-        });
-      } else if (!this.routerType && this.paramCats.length) {
-        this.selectedAttrs = [];
-        this.deAttrGIds = [];
-        this.attrList.forEach((element, i) => {
-          this.deAttrGIds.push(element.Id);
-          this.selectedAttrs.push({
-            Id: element.Id,
-            Vals: []
-          });
+      //     element.Children.forEach(item => {
+      //       this.selectedCats[i].Vals.push(item.Id);
+      //       this.paramCats.push(item.Id);
+      //     });
+      //   });
+      // } else if (!this.routerType && this.paramCats.length) {
+      //   this.selectedAttrs = [];
+      //   this.deAttrGIds = [];
+      //   this.attrList.forEach((element, i) => {
+      //     this.deAttrGIds.push(element.Id);
+      //     this.selectedAttrs.push({
+      //       Id: element.Id,
+      //       Vals: []
+      //     });
 
-          element.AttrValues.forEach(item => {
-            this.selectedAttrs[i].Vals.push(item.Id);
-          });
-        });
-      }
+      //     element.AttrValues.forEach(item => {
+      //       this.selectedAttrs[i].Vals.push(item.Id);
+      //     });
+      //   });
+      // }
 
       this.$nextTick(() => {
         this.init = true;
@@ -269,35 +274,77 @@ export default class InsAdvancedSearch extends Vue {
 </script>
 <style scoped lang="less">
 .InsAdvancedSearch {
-  .resetAll{
-    background: #333333;
-    padding-left: 1rem;
-    padding-top: 30px;
+  .resetbox{
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    display: block;
     padding-bottom: 20px;
-    color: #FFF;
-    font-size: 18px;
-    text-decoration: underline;
+    background-color: #fff;
+    margin-bottom: 20px;
+  }
+  .resetAll{
+    // background: #333333;
+    // padding-left: 1rem;
+    // padding-top: 30px;
+    // padding-bottom: 20px;
+    // color: #FFF;
+    // font-size: 18px;
+    // text-decoration: underline;
     cursor: pointer;
+    height: 45px;
+    line-height: 45px;
+    color:#FFF;
+    font-size: 18px;
+    text-transform: uppercase;
+    width: 360px;
+    margin: 0 auto;
+    // height: 100%;
+    // background: url('/Images/pc/Product-list_btn.png') no-repeat top center;
+    background-color: #b21535;
+    background-size: cover;
+    text-align: center;
+    letter-spacing: 2px;
   }
   .resetTitle{
-    background: #666666;
-    padding-left: 1rem;
-    padding-top: 40px;
-    padding-bottom: 20px;
-    color:#FFF;
+    // background: #fff;
+    padding-left: 20px;
+    padding-top: 22px;
+    padding-bottom: 22px;
+    color:#333333;
     font-size: 20px;
+    text-transform: uppercase;
     span{
       float:right;
-      margin-right: 1rem;
-      font-size: 28px;
-      cursor: pointer;
+      margin-right: 20px;
+      font-size: 24px;
+      color: #b21535;
     }
   }
 }
 .ReSearchItem{
     position: relative;
     background: #FFF;
-    padding: 1rem;
-    border-bottom: 1px solid #eee;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
   }
+.scrollbar{
+  height: calc(100vh - 155px);
+  // overflow: auto;
+  // overflow-x: hidden;
+  overflow-y: scroll;
+}
+#style-4::-webkit-scrollbar-track {
+  // box-shadow:inset 0 0 3px rgba(212,121,77,1);
+  background-color: transparent;
+}
+#style-4::-webkit-scrollbar {
+  width: 3px;
+  background-color: transparent;
+}
+#style-4::-webkit-scrollbar-thumb {
+  background-color: rgba(170, 22, 56, 0.6);
+  // border: 2px solid rgba(0, 0, 0, 0.3);
+}
 </style>

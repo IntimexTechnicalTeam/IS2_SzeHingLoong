@@ -3,7 +3,9 @@
     <!-- <div class="Banner"  :style="{backgroundImage: 'url('+ ImgList +')',backgroundSize:'100% 100%'}">
         <div class="TitleBg"><div class="innerBoxText">{{$t('Forgetpassword.ForgetPassword')}}</div></div>
     </div> -->
-    <div class="DetailTitle"><img :src="ImgList" v-show="ImgList!==null"><div class="TitleBg"><div class="innerBoxText">{{$t('Forgetpassword.ForgetPassword')}}</div></div></div>
+    <div class="DetailTitle">
+      <!-- <img :src="ImgList" v-show="ImgList!==null"> -->
+      <div class="TitleBg"><div class="innerBoxText">{{$t('Forgetpassword.ForgetPassword')}}</div></div></div>
     <div class="ForgetPassMain">
       <div style="margin-top: 15px;" v-if="ResetPwd">
         <h2 class="ResetPwdTips">{{$t('Forgetpassword.ResetPwdTips')}}</h2>
@@ -127,28 +129,7 @@ export default class InsForgetPassword extends Vue {
   img{
     width: 100%;
   }
-  .TitleBg{
-    width: 75%;
-    border: 1px solid #ffffff;
-    height: 4.5rem;
-    line-height: 4.5rem;
-    margin: 0 auto;
-    padding: 10px;
-    margin-bottom: 20px;
-    top: 50%;
-    position: absolute;
-    transform: translateY(-50%);
-    .innerBoxText{
-      background:#ffffff;
-      color: #333333;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.5rem;
-      font-weight: 700;
-      font-family: 'Arial';
-    }
-  }
+
 }
 .Banner {
   width: 100%;
@@ -158,24 +139,22 @@ export default class InsForgetPassword extends Vue {
   position: relative;
 }
 .TitleBg{
-  width: 75%;
-  height: 4.5rem;
-  border:1px solid #ffffff;
-  margin: 0 auto;
-  padding: .8rem;
-  .innerBoxText{
     width: 100%;
-    height: 100%;
-    background:#ffffff;
-    color: #333333;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.5rem;
-    font-weight: 700;
-    font-family: 'Arial';
+    // height: 4.5rem;
+    // background: url('/images/mobile/Mobile-back.png') center no-repeat;
+    background-size: contain;
+    text-align: center;
+    position: relative;
+    // margin-top: 2rem;
+    // margin-bottom: 2rem;
+    .innerBoxText{
+      font-size: 2.4rem;
+      color: #aa1638;
+      // letter-spacing: 1px;
+      padding-top: 2rem;
+      font-weight: bold;
+    }
   }
-}
 #container {
   width: 100%;
   display: inline-block;

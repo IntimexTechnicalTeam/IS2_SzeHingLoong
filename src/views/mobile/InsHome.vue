@@ -1,9 +1,12 @@
 <template>
   <div class="home" v-cloak>
-    <HomeBanner :initOptions="swiperOption" :page="'Home'" :initSwiper="true" class="banner" />
+    <HomeBanner :initOptions="swiperOptionhome" :page="'Home'" :initSwiper="true" class="banner" />
+    <HkAbout/>
     <HkPromotion />
-    <HkBranch />
+    <PkNews/>
+    <!-- <HkBranch /> -->
     <HkLiveBox />
+    <PkMap/>
   </div>
 </template>
 
@@ -14,11 +17,16 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
     HomeBanner: () => import('@/components/base/mobile/InsBanner.vue'),
     HkPromotion: () => import('@/components/hkTasteBusiness/mobile/home/HkPromotion.vue'),
     HkBranch: () => import('@/components/hkTasteBusiness/mobile/home/HkBranch.vue'),
-    HkLiveBox: () => import('@/components/hkTasteBusiness/mobile/home/HkLiveBox.vue')
+    HkLiveBox: () => import('@/components/hkTasteBusiness/mobile/home/HkLiveBox.vue'),
+    HkAbout: () => import('@/components/hkTasteBusiness/mobile/home/HkAbout.vue'),
+    PkNews: () => import('@/components/hkTasteBusiness/mobile/home/PkNews.vue'),
+    PkMap: () => import('@/components/hkTasteBusiness/mobile/home/PkMap.vue')
   }
 })
 export default class InsHome extends Vue {
-  swiperOption: object = {
+  swiperOptionhome: object = {
+    spaceBetween: 30,
+    effect: 'fade',
     autoplay: {
       disableOnInteraction: false
     },

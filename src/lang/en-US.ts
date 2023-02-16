@@ -135,7 +135,10 @@ export default {
     Total: 'Total',
     Product: 'Products',
     ProductDetail: 'Product Detail',
-    Unit: 'Unit'
+    Unit: 'Unit',
+    PutawayL: 'Put away',
+    More: 'More',
+    ViewAll: 'View All'
   },
   Shoppingcart: {
     ShoppingcartTitle: 'Shopping Bag',
@@ -151,6 +154,7 @@ export default {
     None: 'Sign in to see what you may have saved Before, or start shopping now!',
     more: 'more',
     hide: 'hide',
+    SubTotal: 'Sub Total',
     ProceedToCheckout: 'Proceed to Checkout'
   },
   Login: {
@@ -172,7 +176,8 @@ export default {
     Already: 'Already have an account?',
     Signinnow: 'Sign in now',
     onlineaccount: 'Don\'t have an online account?',
-    Signin: 'Sign in'
+    Signin: 'Sign in',
+    Loginregistration: 'Login / registration'
   },
   Register: {
     RegisterTitle: 'Registration',
@@ -463,7 +468,9 @@ export default {
     BusinessHours: 'Business Hours',
     BigSales: 'BIG SALES',
     WhatNews: 'WHAT’S NEWS',
-    PlsChoose: 'Please click to select the content you want to view :'
+    PlsChoose: 'Please click to select the content you want to view :',
+    More: 'More',
+    discounts: 'Current offer products'
   },
   promotion: {
     enter: 'enter',

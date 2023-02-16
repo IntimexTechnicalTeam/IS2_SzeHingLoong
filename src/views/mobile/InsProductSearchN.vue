@@ -1,9 +1,10 @@
 <template>
   <div id="container" class="ProductSearch">
         <div class="ProducBanner">
-            <ProductListSwiper :TitleName="$t('product.Producttitle')"/>
+            <ProductListSwiper/>
         </div>
         <div class="SearchSlide">
+          <div class="drawer-bg" v-if="showSearchSlide"  @click="handleClickOutside"/>
           <div class="leftSide">
             <advancedSearch @advancedChange="advancedChange" v-if="isAdvanced"  @closeSub="closeSub" @resetAll="resetAll" />
           </div>
@@ -13,6 +14,7 @@
             <li @click="showSearchSlide"><span class="el-icon-s-operation"></span><b>{{$t('product.Screening')}}</b></li>
             <li>
               <select v-model="PriceItem" @change="getselect(PriceItem)">
+                <option value="">{{ $t("product.Paixu") }}</option>
                 <option value="desc">{{$t('product.PriceHL')}}</option>
                 <option value="asc">{{$t('product.PriceLH')}}</option>
               </select>
@@ -57,7 +59,7 @@ export default class InsProductSearch extends Vue {
   attrs: object[] = []; // 选中的产品属性数组
   searchCatalogs: number[] = []; // 选中的产品目录数组
   searchType: number = 1; // 搜索类型（0 => 叠加，1 => 筛选）
-  PriceItem:string='desc';
+  PriceItem:string='';
   isAdvanced: boolean = true;
 
   // 搜索关键词
@@ -144,6 +146,10 @@ export default class InsProductSearch extends Vue {
     if (this.totalRecord !== this.proList.length) { this.currentPage++; } else { this.tips = false; }
   }
 
+  handleClickOutside() {
+    this.closeSub();
+  }
+
   mounted () {
 
   }
@@ -204,8 +210,9 @@ export default class InsProductSearch extends Vue {
 
 .product_item{
     width: 50% !important;
-    padding:2rem 1rem 0;
+    padding:1rem 1rem 0;
     box-sizing:border-box;
+    margin-bottom: 3rem;
 }
 
 .loading{
@@ -213,6 +220,9 @@ export default class InsProductSearch extends Vue {
     height: 3rem;
     line-height: 3rem;
     margin: 1rem 0 2rem;
+    p{
+      font-size: 1.2rem;
+    }
 }
 
 .ProductSearch {
@@ -227,8 +237,8 @@ export default class InsProductSearch extends Vue {
   left: 0;
   top: 0px;
   bottom: 0px;
-  background: rgba(0,0,0,.6);
-  overflow-x: scroll;
+  // background: rgba(0,0,0,.6);
+  // overflow-x: scroll;
   z-index: 999999;
   display: none;
   .leftSide{
@@ -237,6 +247,12 @@ export default class InsProductSearch extends Vue {
     min-height: 100%;
     position: absolute;
     transition: all .5s;
+    z-index: 1000;
+    box-shadow: 0 0 6px #999;
+    overflow-x: scroll;
+    background-color: #fff;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
   }
 
 }
@@ -251,19 +267,24 @@ export default class InsProductSearch extends Vue {
   ul{
     width: 95%;
     margin: 0 auto;
+    display: flex;
+
   }
   li{
-    float: left;
-    margin-right: 4%;
-    width: 47%;
-    background: #FFF;
-    border:1px solid #eee;
-    font-size: 1.6rem;
-    background: #666666;
-    color: #FFF;
-    height: 3.5rem;
-    line-height: 3.5rem;
-    list-style: none;
+      float: left;
+      margin-right: 2%;
+      width: 49%;
+      border: 1px solid #ab1638;
+      font-size: 1.6rem;
+      // background: #fff;
+      color: #ab1638;
+      height: 3.5rem;
+      line-height: 3.5rem;
+      list-style: none;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     span{
     width: 20%;
     display: inline-block;
@@ -271,31 +292,51 @@ export default class InsProductSearch extends Vue {
     text-align: center;
     }
     b{
-      width: 60%;
-      display: inline-block;
+      // width: 100%;
+      display: flex;
+      align-items: center;
       text-align: center;
       font-size: 1.2rem;
       font-weight: 500;
+      justify-content: center;
+      img{
+        width: 1.5rem;
+        height: 1.5rem;
+        margin-right: 0.5rem;
+        display: block;
+      }
     }
     select{
-    width: 100%;
-    border: none;
-    padding-left: .5rem;
-    height: 3.5rem;
-    line-height: 3.5rem;
-    font-size: 1.2rem;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background: url(/images/mobile/arrow-down-back.png) 98% 15px no-repeat;
-    background-size: 15px;
-    outline: none;
+      width: 100%;
+      border: none;
+      padding-left: .5rem;
+      height: 3.2rem;
+      line-height: 3.2rem;
+      font-size: 1.2rem;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background: url(/images/mobile/arrow-down-back.png) 98% 18px no-repeat;
+      // border: 1px solid #ab1638;
+      background-size: 15px;
+      outline: none;
+      color: #ab1638;
     }
     &:last-child{
       margin-right: 0px!important;
-      background: #FFF!important;
-      color:#333333;
+      // background: #FFF!important;
+      // color:#333333;
     }
   }
+}
+.drawer-bg {
+  // background: #000;
+  // opacity: 0.3;
+  width: 100%;
+  top: 0;
+  height: 100%;
+  position: fixed;
+  z-index: 999;
+  background: rgba(0,0,0,.6);
 }
 </style>

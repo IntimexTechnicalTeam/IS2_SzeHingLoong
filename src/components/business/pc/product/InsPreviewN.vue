@@ -41,7 +41,8 @@
 import { Vue, Prop, Component, Watch } from 'vue-property-decorator';
 import { swiper, swiperSlide } from 'vue-awesome-swiper/src';
 import 'viewerjs/dist/viewer.css';
-import { component as Viewer } from 'v-viewer';
+import Viewer from 'v-viewer/src/component.vue';
+// import { component as Viewer } from 'v-viewer';
 // import Viewer from 'v-viewerc/component.vue';
 // Vue.use(Viewer, {
 //   defaultOptions: {

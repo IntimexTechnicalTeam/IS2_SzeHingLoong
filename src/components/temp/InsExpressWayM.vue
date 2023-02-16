@@ -789,19 +789,25 @@ export default class InsExpressWay extends Vue {
     padding: 0 20px;
 }
 .expressWay_Warpper{
-  width: 100vw;
-  border: 1px solid rgba(0, 0, 0, .1);
-  margin-bottom: 3rem;
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  box-sizing: border-box;
   .expressWay_title{
     font-size: 1.5rem;
     background-color:@base_color;
     padding: 1rem;
     color: white;
   }
+  /deep/ .in_select_main{
+    font-size: 1.2rem;
+    box-sizing: border-box;
+  }
   .expressWay_main{
     .express{
       .none{
             padding: 1rem;
+
       }
       .address_item_warpper{
         .address_footer{
@@ -819,6 +825,7 @@ export default class InsExpressWay extends Vue {
                   color: white;
                   background-color: @base_color;
                   cursor: pointer;
+                  font-size: 1.2rem;
                 }
             }
         }
@@ -854,7 +861,11 @@ export default class InsExpressWay extends Vue {
                 }
                 .heightLine{
                   background-color: @base_color;
+                  font-size: 1.2rem;
                 }
+            }
+            .itemPadding{
+              font-size: 1.2rem;
             }
           }
         }
@@ -883,6 +894,7 @@ export default class InsExpressWay extends Vue {
     .date,.time,.note{
       width: 120px;
       font-size: 16px;
+      margin-top: 8px;
     }
     .inputMain{
       display: flex;

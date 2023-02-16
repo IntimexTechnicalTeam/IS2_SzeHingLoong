@@ -1,5 +1,5 @@
 <template>
-  <div class="header_menu">
+  <div class="header_menu" :class="{'menu_Eng': $Storage.get('locale') === 'E'}">
     <component :navData="NavData" v-bind:is="CurrentNav"></component>
   </div>
 </template>

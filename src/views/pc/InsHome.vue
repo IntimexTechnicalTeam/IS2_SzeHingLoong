@@ -1,9 +1,12 @@
 <template>
   <div class="home" v-cloak>
-    <HomeBanner :initOptions="swiperOption" :page="'Home'" :initSwiper="true" class="banner" />
+    <HomeBanner :initOptions="swiperOptionhome" :page="'Home'" :initSwiper="true" class="banner" />
+    <HkAbout/>
     <HkPromotion />
-    <HkBranch />
+    <PkNews/>
+    <!-- <HkBranch /> -->
     <HkLiveBox />
+    <PkMap/>
   </div>
 </template>
 
@@ -15,11 +18,16 @@ import api from '@/sdk/api/Api.ts';
     HomeBanner: () => import(/* webpackChunkName: "home" */ '@/components/base/pc/InsBanner.vue'),
     HkPromotion: () => import(/* webpackChunkName: "home" */ '@/components/hkTasteBusiness/pc/home/HkPromotion.vue'),
     HkBranch: () => import(/* webpackChunkName: "home" */ '@/components/hkTasteBusiness/pc/home/HkBranch.vue'),
-    HkLiveBox: () => import(/* webpackChunkName: "home" */ '@/components/hkTasteBusiness/pc/home/HkLiveBox.vue')
+    HkLiveBox: () => import(/* webpackChunkName: "home" */ '@/components/hkTasteBusiness/pc/home/HkLiveBox.vue'),
+    HkAbout: () => import('@/components/hkTasteBusiness/pc/home/HkAbout.vue'),
+    PkNews: () => import('@/components/hkTasteBusiness/pc/home/PkNews.vue'),
+    PkMap: () => import('@/components/hkTasteBusiness/pc/home/PkMap.vue')
   }
 })
 export default class InsHome extends Vue {
-  swiperOption: object = {
+  swiperOptionhome: object = {
+    spaceBetween: 30,
+    effect: 'fade',
     autoplay: {
       disableOnInteraction: false
     },

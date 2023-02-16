@@ -301,6 +301,7 @@ export default class InsLoginN extends Vue {
                 display: flex;
                 justify-content: space-between;
             }
+
         }
         .register{
             width: 47.5%;
@@ -322,4 +323,9 @@ export default class InsLoginN extends Vue {
         }
     }
 }
+
+/deep/ .large{
+  font-size: 18px;
+}
+
 </style>

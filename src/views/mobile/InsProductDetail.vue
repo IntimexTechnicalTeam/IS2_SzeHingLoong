@@ -143,13 +143,13 @@ export default class ProductDetail extends Vue {
 }
 </script>
 <style  lang="less">
-.product_detail p,.product_detail h3{
-  padding:2rem;
-}
-.product_detail h3{
-  font-size:1.4rem;
-  font-weight:100;
-}
+// .product_detail p,.product_detail h3{
+//   padding:2rem;
+// }
+// .product_detail h3{
+//   font-size:1.4rem;
+//   font-weight:100;
+// }
 .el-rate__decimal {
     display: inline-block;
     overflow: hidden;
@@ -175,29 +175,17 @@ export default class ProductDetail extends Vue {
     height: 3rem;
     .huge{
       display: inline-block;
-      &:nth-child(1){
-        font-size: 1.6rem;
-      }
-      &:nth-child(2){
-        font-size:2rem;
-        color:#b40606;
-        font-weight: 700;
-      }
+      font-size: 1.6rem;
+      color:#b40606;
+      font-weight: 700;
     }
   }
   .primePricesMain{
     .huge{
       display: inline-block;
-      &:nth-child(1){
-        font-size: 1.2rem;
-        color: #999;
-        text-decoration: line-through;
-      }
-      &:nth-child(2){
-        font-size: 1.2rem;
-        color: #999;
-        text-decoration: line-through;
-      }
+      font-size: 1.2rem;
+      color: #999;
+      text-decoration: line-through;
     }
   }
 }
@@ -216,8 +204,8 @@ export default class ProductDetail extends Vue {
 }
 .isActive{
   color:#FFF!important;
-  background: #262626 !important;
-  border:1px solid #262626!important;
+  background: #aa1638 !important;
+  border:1px solid #aa1638!important;
 }
 .productDetail_container {
   width: 100%;
@@ -239,7 +227,7 @@ export default class ProductDetail extends Vue {
       margin:0 auto;
       .comment_title,.detail_title{
         width: 48%;
-        color:#000000;
+        color:#aa1638;
         text-align: center;
         font-size: 1.4rem;
         padding-top: 1rem;
@@ -249,24 +237,34 @@ export default class ProductDetail extends Vue {
       }
       .detail_title{
         margin-right: calc(4% - 4px);
-         border:1px solid #000;
+         border:1px solid #aa1638;
       }
       .comment_title{
-        border:1px solid #000;
+        border:1px solid #aa1638;
+        color: #aa1638;
+        cursor: pointer;
       }
     }
     .product_detail{
       width: 95%;
       margin:0 auto;
       background: #fff;
-      border: 1px solid #000;
+      border: 1px solid #aa1638;
       min-height: 20rem;
       border-radius: 5px;
       margin-top: 1rem;
       margin-bottom: 1rem;
-      p{
-        font-size: 1.6rem;
-     }
+      box-sizing: border-box;
+      /deep/ p{
+        font-size: 1.2rem;
+        padding: 1rem;
+
+      }
+      /deep/ h3{
+        font-size: 1.2rem;
+        padding: 1rem;
+
+      }
     }
   }
 }

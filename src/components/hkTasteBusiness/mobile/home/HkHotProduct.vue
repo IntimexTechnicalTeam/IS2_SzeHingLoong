@@ -1,13 +1,13 @@
 <template>
-  <div class="productBox">
-     <div class="TitleBg"><div class="innerBox">{{$t('Cms.BigSales')}}</div></div>
+  <div class="productBox fade-in-hot">
+     <div class="TitleBg"><div class="innerBox">{{$t('Cms.discounts')}}</div></div>
     <div class="swiper-container swiper-container-hot">
-        <swiper :options="swiperOption" ref="mySwiper">
+        <swiper :options="swiperOptionHot" ref="mySwiper">
         <!-- slides -->
         <swiperSlide v-for="(slide, index) in hotProducts" :key="index">
            <inProductWindow :item="slide"  style="width:100%;" class="insProductHot"></inProductWindow>
         </swiperSlide>
-        <div class="swiper-scrollbar"   slot="scrollbar"></div>
+        <div class="swiper-scrollbar swiper-scrollbar-hot" slot="scrollbar"></div>
         </swiper>
 
     </div>
@@ -27,17 +27,13 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper/src';
 export default class PkHotProduct extends Vue {
     hotProducts:any[]=[];
     bannerImg: string = '';
-    swiperOption: object = {
+    swiperOptionHot: object = {
       pagination: {
         el: '.swiper-pagination',
         clickable: true
       },
       scrollbar: {
-        el: '.swiper-scrollbar'
-      },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev'
+        el: '.swiper-scrollbar.swiper-scrollbar-hot'
       },
       slidesPerView: 2
     };
@@ -49,8 +45,31 @@ export default class PkHotProduct extends Vue {
         }
       });
     }
+    HotScroll () {
+      let fadeInElements = document.getElementsByClassName('fade-in-hot');
+      // console.log(document.getElementsByClassName('fade-in'), '滚动');
+      for (var i = 0; i < fadeInElements.length; i++) {
+        let elem = fadeInElements[i] as HTMLElement;
+        if (this.isElemVisible(elem)) {
+          elem.style.opacity = '1';
+          elem.style.transform = 'translate(0, 0)';
+          // fadeInElements.splice(i, 1); // 只让它运行一次
+        }
+      }
+      // document.removeEventListener('scroll', this.handleScroll);
+    }
+    isElemVisible (el) {
+      var rect = el.getBoundingClientRect();
+      var elemTop = rect.top + 300; // 200 = buffer
+      var elemBottom = rect.bottom;
+      return elemTop < window.innerHeight && elemBottom >= 0;
+    }
     mounted () {
       this.loadHotProducts();
+      document.addEventListener('scroll', this.HotScroll);
+    }
+    destroyed() {
+     document.removeEventListener('scroll', this.HotScroll);
     }
 }
 </script>
@@ -75,23 +94,20 @@ export default class PkHotProduct extends Vue {
 </style>
 <style lang="less" scoped>
 .TitleBg{
-  width: 90%;
-  height: 5rem;
-  border:1px solid #4d4d4d;
-  margin: 0 auto;
-  padding: .5rem;
+  width: 100%;
+  // height: 79px;
+  // background: url('/images/pc/titilebg.png') center no-repeat;
+  background-size: contain;
+  text-align: center;
+  position: relative;
   margin-bottom: 2rem;
   .innerBox{
-    width: 100%;
-    height: 100%;
-    background:#4d4d4d;
-    color: #FFF;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     font-size: 2rem;
-    font-weight: 700;
-    font-family: 'Arial';
+    color: #aa1638;
+    // text-transform: uppercase;
+    font-weight: bold;
+    // letter-spacing: 1px;
+    // padding-top: 44px;
   }
 }
 .productBox {
@@ -151,5 +167,11 @@ export default class PkHotProduct extends Vue {
     display: block;
     border: 1px solid #000;
     border-radius: 10px;
+}
+.fade-in-hot {
+  opacity: 0;
+  transition: 1s all ease-out;
+  // transform: translate(0, -30px);
+  box-sizing: border-box;
 }
 </style>

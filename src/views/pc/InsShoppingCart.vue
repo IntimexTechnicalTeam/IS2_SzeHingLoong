@@ -4,7 +4,9 @@
     <div id="main-content">
       <div class="favorite-box order-box">
         <div class="favorite-box-top">
-          <div class="login-register-title">{{$t('Shoppingcart.ShoppingcartTitle')}}</div>
+          <div class="login-register-title">
+            <div class="innerBox">{{$t('Shoppingcart.ShoppingcartTitle')}}</div>
+          </div>
           <div class="clear"></div>
         </div>
         <div class="favorite-box-content">
@@ -22,17 +24,17 @@
               </a>
               <div class="favorite-one-messge">
                 <p class="product-title">{{one.Product.Name}}</p>
-                <p class="product-code">{{one.Product.Code}}</p>
+                <!-- <p class="product-code">{{one.Product.Code}}</p> -->
                 <p class="product-code">
                   <span v-if="one.AttrName1">{{one.AttrTypeName1}}：{{one.AttrName1}}</span>&nbsp;
                   <span v-if="one.AttrName2">{{one.AttrTypeName2}}：{{one.AttrName2}}</span>&nbsp;
                   <span v-if="one.AttrName3">{{one.AttrTypeName3}}：{{one.AttrName3}}</span>&nbsp;
                 </p>
-                <p class="product-price">
+                <!-- <p class="product-price">
                   <span
                     class="p-price-discount"
                   >{{Currency.Code}} {{(one.Product.SalePrice) | PriceFormat}}</span>
-                </p>
+                </p> -->
               </div>
               <div class="merchant-one-calc">
                 <div class="common-num">
@@ -67,10 +69,10 @@
         </div>
         <div class="shoppingcart-handle">
           <p>
-            <span>{{$t('Shoppingcart.Total')}}</span>
+            <span>{{$t('Shoppingcart.SubTotal')}}:</span>
             <span class="total-price">{{Currency.Code}} {{(totalAmount) | PriceFormat}}</span>
           </p>
-          <a href="javascript:;" class="btn" @click="submit">{{$t('Shoppingcart.ProceedToCheckout')}}</a>
+          <a href="javascript:;" class="btn" @click="submit">{{$t('Shoppingcart.CheckoutList')}}</a>
         </div>
       </div>
     </div>
@@ -149,6 +151,7 @@ export default class InsShoppingcart extends Vue {
     let item:ShopCartItem = this.items.splice(one, 1)[0];
     this.$Api.shoppingCart.removeItem(item.Id).then(result => {
       this.$store.dispatch('setShopCart', this.$Api.shoppingCart.getShoppingCart());
+      if (this.ShoppingCart.Items.length === 0) this.$Confirm(this.$t('Message.Message'), this.$t('Shoppingcart.None'), () => { this.$router.push('/product/search/-'); }, () => { this.$router.push('/'); });
     });
   }
   next () {
@@ -228,6 +231,17 @@ export default class InsShoppingcart extends Vue {
 }
 </script>
 <style scoped lang='less'>
+.login-register-title{
+  width: 100%;
+  background-size: contain;
+  text-align: center;
+  position: relative;
+  .innerBox{
+    font-size: 30px;
+    color: #aa1638;
+    font-weight: 700;
+  }
+}
 /*我的最爱*/
   .disabled {
       pointer-events: none;
@@ -245,29 +259,37 @@ export default class InsShoppingcart extends Vue {
   padding-bottom: 60px;
 }
 .favorite-box-content {
-  margin-top: 20px;
+  margin-top: 40px;
 }
 .favorite-one .product-img {
   float: left;
-  width: 10%;
-  height: auto;
-  border: 1px solid #e6e6e6;
+  width: 100px;
+  height: 100px;
+  // border: 1px solid #e6e6e6;
 }
 .num-content .input-text {
   display: inline-block;
-  width: 38px;
-  height: 30px;
-  line-height: 30px;
+  width: 60px;
+  height: 32px;
+  line-height: 32px;
   text-align: center;
   border: none;
   color: #999999;
   outline: none;
   border-left: 1px solid #e0e0e0;
   border-right: 1px solid #e0e0e0;
+  background-color: #fff;
+  font-size: 16px;
 }
 .favorite-one-messge .product-title {
-  color: #333;
+  color: #636363;
   font-size: 18px;
+  font-family: 'Poppins-Light';
+    overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-break: break-word;
 }
 .favorite-one-messge .product-code {
   color: #b2b2b2;
@@ -287,16 +309,16 @@ export default class InsShoppingcart extends Vue {
   font-size: 16px;
 }
 .shoppingcart-one-title .order-product-name {
-  width: 48.7%!important;
-  margin-left: 1.6%;
+  width: 589px!important;
+  margin-left: 0;
   text-indent: 0px!important;
 }
 .shoppingcart-one-title span {
   font-size: 16px;
 }
 .order-one-title span {
-  color: #1b1b1b;
-  font-size: 14px;
+  color: #a0a0a0;
+  font-size: 16px;
   float: left;
   line-height: 35px;
 }
@@ -307,7 +329,7 @@ export default class InsShoppingcart extends Vue {
   width: 100%;
 }
 .merchant-one .favorite-one-messge {
-  width: 38.7%;
+  // width: 38.7%;
 }
 .favorite-one-messge {
   float: left;
@@ -316,12 +338,12 @@ export default class InsShoppingcart extends Vue {
   text-align: left;
 }
 .shoppingcart-one {
-  margin-bottom: 60px;
+  margin-bottom: 30px;
 }
 
 .shoppingcart-one-title {
-  border-bottom: 1px solid #1b1b1b;
-  padding: 0 0 0 20px;
+  border-bottom: 1px solid #eaeaea;
+  // padding: 0 0 0 20px;
 }
 
 .shoppingcart-one-title span {
@@ -335,20 +357,20 @@ export default class InsShoppingcart extends Vue {
 }
 
 .shoppingcart-one-title .order-product-name {
-  width: 38%;
-  margin-left: 1.6%;
-  text-indent: 130px;
+  // width: 38%;
+  // margin-left: 1.6%;
+  // text-indent: 130px;
 }
 
 .shoppingcart-one-title .order-quantity {
-  width: 11%;
-  margin-left: 4.2%;
+  width: 140px;
+  // margin-left: 4.2%;
   text-align: center;
 }
 
 .shoppingcart-one-title .order-price {
-  margin-left: 5.9%;
-  width: 15.2%;
+  // margin-left: 5.9%;
+  width: 450px;
   text-align: center;
 }
 
@@ -364,20 +386,31 @@ export default class InsShoppingcart extends Vue {
 }
 
 .merchant-one .favorite-one-messge {
-  width: 38.7%;
+  width: 489px;
+  display: flex;
+  align-items: center;
+  height: 100px;
+  padding: 0 10px;
+  box-sizing: border-box;
+  margin: 0;
 }
 
 .merchant-one-calc {
-  width: 11.2%;
-  margin-left: 4.3%;
+  width: 140px;
+  // margin-left: 4.3%;
   float: left;
   text-align: center;
+  display: flex;
+  align-items: center;
+  height: 100px;
+  justify-content: center;
 }
 
 .merchant-one-calc .common-num {
   display: inline-block;
   border: 1px solid #e0e0e0;
   border-radius: 3px;
+  box-sizing: border-box;
 }
 
 .merchant-total-quantity {
@@ -394,20 +427,27 @@ export default class InsShoppingcart extends Vue {
 
 .merchant-total-price {
   float: left;
-  width: 180px;
-  margin-left: 6%;
+  width: 430px;
+  // margin-left: 6%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  height: 100px;
 }
 
 .merchant-total-price p {
   width: 100%;
   text-align: center;
-  font-size: 20px;
+  font-size: 18px;
   color: #d92526;
   line-height: 20px;
 }
 
 .merchant-del-box {
   float: right;
+  display: flex;
+  align-items: center;
+  height: 100px;
 }
 
 .shoppingcart-handle {
@@ -422,31 +462,37 @@ export default class InsShoppingcart extends Vue {
 }
 
 .shoppingcart-handle .total-price {
-  width: 230px;
-  font-size: 24px;
-  color: #d92526;
+  // width: 230px;
+  padding-left: 10px;
+  font-size: 20px;
+  color: #ca3636;
 }
 
 .shoppingcart-handle .btn {
   display: inline-block;
-  width: 340px;
-  height: 45px;
-  line-height: 45px;
+  width: 300px;
+  height: 50px;
+  line-height: 50px;
   color: #fff;
-  font-size: 26px;
+  font-size: 20px;
   text-align: center;
-  margin-top: 50px;
-  background-color: @primary_color;
-  border-radius: 5px;
+  margin-top: 32px;
+  // background: url('/Images/pc/contac_btn.png') no-repeat top center;
+  background-color: #aa1638;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 .common-num a {
   float: left;
   width: 30px;
-  height: 30px;
+  height: 34px;
   line-height: 30px;
   text-align: center;
   font-size: 20px;
   color: #999999;
+  background-color: #f5f5f5;
+  font-weight: bold;
 }
 .cart-delete:hover {
   background-color: #fa4343;
@@ -469,29 +515,29 @@ export default class InsShoppingcart extends Vue {
 .favorite-box .login-register-title {
   margin-left: 0;
 }
-.login-register-title {
-  float: left;
-  width: 300px;
-  height: 45px;
-  line-height: 45px;
-  margin-left: 160px;
-  text-align: center;
-  color: #fff;
-  font-size: 26px;
-  background-color: @primary_color;
-  clip-path: polygon(30px 0, 300px 0, 270px 45px, 0 45px);
-  -webkit-clip-path: polygon(30px 0, 300px 0, 270px 45px, 0 45px);
-  -moz-clip-path: polygon(30px 0, 300px 0, 270px 45px, 0 45px);
-  -ms-clip-path: polygon(30px 0, 300px 0, 270px 45px, 0 45px);
-}
+// .login-register-title {
+//   float: left;
+//   width: 300px;
+//   height: 45px;
+//   line-height: 45px;
+//   margin-left: 160px;
+//   text-align: center;
+//   color: #fff;
+//   font-size: 26px;
+//   background-color: @primary_color;
+//   clip-path: polygon(30px 0, 300px 0, 270px 45px, 0 45px);
+//   -webkit-clip-path: polygon(30px 0, 300px 0, 270px 45px, 0 45px);
+//   -moz-clip-path: polygon(30px 0, 300px 0, 270px 45px, 0 45px);
+//   -ms-clip-path: polygon(30px 0, 300px 0, 270px 45px, 0 45px);
+// }
 .merchant-one {
   border-top: 0;
   border-bottom: 1px solid #e6e6e6;
 }
 .favorite-one {
   box-sizing: border-box;
-  padding: 30px 20px;
-  border-top: 1px solid #e6e6e6;
+  padding: 20px 10px;
+  // border-top: 1px solid #e6e6e6;
   transition: 0.5s ease;
   -webkit-transition: 0.5s ease;
   -moz-transition: 0.5s ease;

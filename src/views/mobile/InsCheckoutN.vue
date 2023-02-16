@@ -5,7 +5,7 @@
         <div class="checkoutl checkoutr">
             <div class="shopCart_warpper">
               <div class="shopcartTitle">{{$t('CheckOut.Product')}}</div>
-              <div :style="{ height: items*162 + 'px'}" class="item_change">
+              <div :style="{ height: items*144 + 'px'}" class="item_change">
                   <!-- <ShoppingCartItem v-for="(item,index) in Shoppcart.Items" :key="index" :index="index" :ShopcartItem="item" :lock="true" ></ShoppingCartItem> -->
 
                      <div class="ShoppingCartItem_warpper" :class="{ bg: index%2 !== 0 }" v-for="(item,index) in Shoppcart.Items" :key="index" :index="index">
@@ -144,8 +144,8 @@
         </div>
     </div>
     <div class="btn_warpper">
-      <InsButton style="display:inline-block;margin-top:20px" class="btnStyle" width="100%" size="middle" :nama="$t('CheckOut.Checkout')" @click="checkOut" :loading="COloading"/>
-      <InsButton v-show="checkouting" style="display:inline-block;" class="btnStyle" width="100%" size="middle" :nama="$t('CheckOut.BacktoShoppingCart')" @click="Hyperlink"  />
+      <InsButton class="btnStyle" width="100%" size="middle" :nama="$t('CheckOut.Checkout')" @click="checkOut" :loading="COloading"/>
+      <InsButton v-show="checkouting" class="btnStyle" width="100%" size="middle" :nama="$t('CheckOut.BacktoShoppingCart')" @click="Hyperlink"  />
     </div>
   </div>
 </template>
@@ -561,19 +561,66 @@ export default class InsCheckoutN extends Vue {
       display: none;
     }
   .el-checkbox{
-    width: calc(100% - 4px);
+    width: 100%;
+    padding: 0 1rem;
+    box-sizing: border-box;
+    margin: 1rem 0;
+    display: grid;
     .el-checkbox__label{
       width: 100%;
       padding: 0;
+      border: 1px solid rgba(0,0,0,.1);
+      box-sizing: border-box;
+      border-radius: 0;
+      overflow: hidden;
+      .coupon_title{
+        font-size: 1.4rem;
+        // background-color: #d4794d;
+        display: inline-block;
+        // padding: 0 2rem;
+        color: #666;
+        margin-bottom: 1rem;
+      }
     }
   }
   .el-checkbox__input.is-checked+.el-checkbox__label {
-      color: @primary_color2;
-      border: solid 1px @primary_color2;
+      color: #d4794d !important;
+      border: solid 1px #d4794d !important;
+      box-sizing: border-box;
+      border-radius: 0.5rem;
+      .coupon_item {
+        border: none !important;
+        border-radius: 0.5rem;
+      }
+      .coupon_title{
+        color: #d4794d !important;
+      }
+      .coupon_is_valid{
+        background-color: #d4794d !important;
+      }
+      .coupon_remark, .coupon_expiryDate{
+        color: #d4794d !important;
+      }
+
   }
   .el-checkbox__label{
       // color: @primary_color2;
-      border: solid 1px transparent;
+      // border: solid 1px transparent;
+  }
+  .is-disabled {
+    // border: 1px solid #e5e5e5 !important;
+    .coupon_title {
+      // background-color: #c0c4cc !important;
+    }
+    .coupon_is_valid {
+      background-color: #c0c4cc !important;
+    }
+    .coupon_title{
+      color: #c0c4cc !important;
+    }
+    .coupon_remark, .coupon_expiryDate{
+      color: #c0c4cc !important;
+    }
   }
 }
 .btnStyle span{
@@ -615,7 +662,7 @@ export default class InsCheckoutN extends Vue {
   width: 100vw;
   .main_warpper{
     display: flex;
-    width: 100vw;
+    width: 96%;
     margin: 0 auto;
     flex-wrap: wrap;
     .checkoutl{
@@ -637,10 +684,11 @@ export default class InsCheckoutN extends Vue {
         //     }
         // }
         .payment_warpper{
-          width: 100vw;
+          width: 100%;
           background-color: white;
-          border-radius: .5rem;
+          // border-radius: .5rem;
           // margin-top: 1rem;
+
           .title{
             font-size: 1.5rem;
           }
@@ -671,7 +719,8 @@ export default class InsCheckoutN extends Vue {
           width: 100%;
         .shopCart_warpper{
           border: solid 1px rgba(0,0,0,.1);
-          margin-bottom: 5rem;
+          margin-bottom: 2rem;
+          box-sizing: border-box;
           .shopcartTitle{
             font-size: 1.6rem;
             background-color:@base_color;
@@ -701,6 +750,7 @@ export default class InsCheckoutN extends Vue {
             display: flex;
             justify-content: space-between;
             padding: 20px 0;
+            align-items: center;
             span{
               font-size: 1.4rem;
             }
@@ -713,6 +763,8 @@ export default class InsCheckoutN extends Vue {
         .payment_warpper{
             border: solid 1px rgba(0,0,0,.1);
             margin-top:20px ;
+            box-sizing: border-box;
+            margin-bottom: 2rem;
             .payment_main{
               .payment_title{
                 font-size: 1.6rem;
@@ -734,6 +786,13 @@ export default class InsCheckoutN extends Vue {
   }
   .btn_warpper{
     text-align: center;
+    .btnStyle{
+      width: 96% !important;
+      display: block;
+      margin-top: 20px;
+      margin: 0 auto;
+      margin-bottom: 1rem;
+    }
   }
 }
 
@@ -742,7 +801,9 @@ export default class InsCheckoutN extends Vue {
   transition: height .5s;
 }
 .coupon_warpper{
-  margin-bottom: 5rem;
+  margin-bottom: 2rem;
+      width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
   .coupon_alltitle{
     font-size: 1.6rem;
     background-color: @base_color;
@@ -756,8 +817,8 @@ export default class InsCheckoutN extends Vue {
     }
     position: relative;
     padding: 1.4rem 1rem;
-    border: 1px solid rgba(0,0,0,.1);
-    border-radius: .5rem;
+    // border: 1px solid rgba(0,0,0,.1);
+    // border-radius: .5rem;
     overflow: hidden;
     .coupon_is_valid{
       position: absolute;
@@ -765,7 +826,7 @@ export default class InsCheckoutN extends Vue {
       right: 0;
       width: 50%;
       height: 80%;
-      background-color: black;
+      background-color: @base_color;
       color: white;
       transform:translate(50%, -50%) rotateZ(45deg);
       .valid_content{

@@ -1,6 +1,9 @@
 <template>
   <div class="handle-one" v-click-outside="closeDialog">
-    <a href="javascript:;" class="handle-icon member-icon handle-icon-window" @click="toggleDialog"></a>
+    <a href="javascript:;" class="handle-icon member-icon handle-icon-window" @click="toggleDialog"><img src="/images/pc/pcindex_06.png" alt="">
+      <span v-if="!$Storage.get('isLogin')">{{$t('Login.Loginregistration')}}</span>
+      <span v-else>{{$t('Account.MemberCenter')}}</span>
+    </a>
     <div class="top-member-detail top-window" v-if="isShow && !isLogin">
       <p class="window-top"></p>
       <div class="window-detail-title">
@@ -330,9 +333,9 @@ export default class InsLogin extends Vue {
 
 /*头部登录弹框 css*/
 .handle-icon {
-    display: block;
-    width:25px;
-    height: 25px;
+    display: flex;
+    width:80px;
+    height: 20px;
     color: #cccccc;
     -webkit-transition-duration: 0.1s;
     transition-duration: 0.1s;
@@ -340,10 +343,21 @@ export default class InsLogin extends Vue {
     transition-property: transform;
     -webkit-transition-timing-function: ease-out;
     transition-timing-function: ease-out;
+    font-size: 12px;
+    span{
+      text-align: center;
+      display: flex;
+      align-items: center;
+    }
 }
 .member-icon {
-    background: url('/images/pc/pcindex_06.png') no-repeat center center;
-    background-size: contain;
+    // background: url('/images/pc/pcindex_06.png') no-repeat center center;
+    // background-size: contain;
+    img{
+      width:20px;
+      display: block;
+      margin-right: 5px;
+    }
 }
 
 #topLoginMessage {
@@ -391,7 +405,7 @@ export default class InsLogin extends Vue {
 .top-member-detail .window-top {
   right: 40px;
   position: absolute;
-  right: 35px;
+  right: 42px;
   top: -18px;
   width: 24px;
   height: 18px;

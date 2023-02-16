@@ -1,12 +1,12 @@
 <template>
-  <div class="liveBox mobileVersion" style="text-align: center;">
+  <div class="liveBox mobileVersion fade-in-hot" style="text-align: center;">
     <div class="liveBox_in">
-        <div class="TitleBg"><div class="innerBox">{{$t('Cms.WhatNews')}}</div></div>
-        <div class="videoBg">
-            <p v-html="videoContent.Body"></p>
-        </div>
+        <!-- <div class="TitleBg"><div class="innerBox">{{$t('Cms.WhatNews')}}</div></div> -->
         <div class="mapBg">
            <p v-html="fbContent.Body"></p>
+        </div>
+        <div class="videoBg">
+            <p v-html="videoContent.Body"></p>
         </div>
     </div>
   </div>
@@ -26,6 +26,31 @@ export default class PkLiveBox extends Vue {
     this.$Api.cms.getContentByDevice({ ContentId: 20299, IsMobile: true }).then(result => {
       this.fbContent = result.CMS;
     });
+  }
+  LiveScroll () {
+      let fadeInElements = document.getElementsByClassName('fade-in-hot');
+      // console.log(document.getElementsByClassName('fade-in'), '滚动');
+      for (var i = 0; i < fadeInElements.length; i++) {
+        let elem = fadeInElements[i] as HTMLElement;
+        if (this.isElemVisible(elem)) {
+          elem.style.opacity = '1';
+          elem.style.transform = 'translate(0, 0)';
+          // fadeInElements.splice(i, 1); // 只让它运行一次
+        }
+      }
+      // document.removeEventListener('scroll', this.handleScroll);
+    }
+    isElemVisible (el) {
+      var rect = el.getBoundingClientRect();
+      var elemTop = rect.top + 300; // 200 = buffer
+      var elemBottom = rect.bottom;
+      return elemTop < window.innerHeight && elemBottom >= 0;
+    }
+  mounted () {
+    document.addEventListener('scroll', this.LiveScroll);
+  }
+  destroyed() {
+     document.removeEventListener('scroll', this.LiveScroll);
   }
   created () {
     this.getVideoContent();
@@ -78,13 +103,13 @@ export default class PkLiveBox extends Vue {
 }
 .liveBox {
     width: 100%;
-    padding-bottom: 4.5rem;
-    background: url('/images/mobile/Mobile-index_04.jpg') no-repeat center center;
+    padding-bottom: 2rem;
+    // background: url('/images/mobile/Mobile-index_04.jpg') no-repeat center center;
     background-size: 100% 100%;
     .liveBox_in{
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
-    padding-top:3rem;
+    padding-top:0;
       // .mapBg{
         // background: url('/images/mobile/mobileIndex_27.png') center center no-repeat;
         // background-size: 100% 100%;
@@ -94,11 +119,12 @@ export default class PkLiveBox extends Vue {
       // }
       .videoBg{
         margin-top: 2rem;
-        margin-bottom: 3rem;
+        margin-bottom: 2rem;
         background-size: 100% 100%;
-        display: inline-block;
-        padding: 2.5rem;
+        display: block;
+        // padding: 2.5rem;
         box-sizing: border-box;
+        width: 100%;
         img{
           width: 100%;
         }
@@ -119,5 +145,11 @@ export default class PkLiveBox extends Vue {
       }
     }
 
+}
+.fade-in-hot {
+  opacity: 0;
+  transition: 1s all ease-out;
+  // transform: translate(0, -30px);
+  box-sizing: border-box;
 }
 </style>

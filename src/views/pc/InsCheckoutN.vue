@@ -575,15 +575,43 @@ export default class InsCheckoutN extends Vue {
     .el-checkbox__label{
       width: 100%;
       padding: 0;
+      border-bottom: 1px solid rgba(0,0,0,.1);
+      box-sizing: border-box;
     }
   }
   .el-checkbox__input.is-checked+.el-checkbox__label {
-      color: @primary_color2;
-      border: solid 1px @primary_color2;
+      color: @primary_color2 !important;
+      border: solid 1px @primary_color2 !important;
+      box-sizing: border-box;
+      .coupon_title{
+        background-color: #d9b672 !important;
+      }
+      .coupon_is_valid{
+        background-color: #d9b672 !important;
+      }
+      .coupon_item{
+        border: none !important;
+      }
+      .coupon_remark, .coupon_expiryDate{
+        color: #d9b672 !important;
+      }
+
   }
   .el-checkbox__label{
       // color: @primary_color2;
       border: solid 1px transparent;
+  }
+  .is-disabled{
+    box-sizing: border-box;
+    .coupon_title{
+      background-color: #C0C4CC !important;
+    }
+    .coupon_is_valid{
+      background-color: #C0C4CC !important;
+    }
+    .coupon_remark, .coupon_expiryDate{
+        color: #C0C4CC !important;
+      }
   }
 }
 </style>
@@ -691,6 +719,7 @@ export default class InsCheckoutN extends Vue {
             display: flex;
             justify-content: space-between;
             padding: 20px 0;
+            align-items: center;
           }
           .discount,.price{
             margin: 20px;
@@ -752,7 +781,7 @@ export default class InsCheckoutN extends Vue {
     position: relative;
     // margin-top: @main_font_size;
     padding: @main_font_size;
-    border-bottom: 1px solid rgba(0,0,0,.1);
+    // border: 1px solid rgba(0,0,0,.1);
     // border-radius: .5rem;
     overflow: hidden;
     .coupon_is_valid{
@@ -761,7 +790,7 @@ export default class InsCheckoutN extends Vue {
       right: 0;
       width: 50%;
       height: 75%;
-      background-color: black;
+      background-color: @base_color;
       color: white;
       transform:translate(50%, -50%) rotateZ(45deg);
       .valid_content{

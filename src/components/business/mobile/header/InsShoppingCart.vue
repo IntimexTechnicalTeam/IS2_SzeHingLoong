@@ -1,14 +1,18 @@
 <template>
   <div class="handle-one" v-click-outside="closeDialog">
     <div style="display:none;">{{ shopCarts.then((result) => {this.shopCart = result.ShopCart;}) }}</div>
-    <a href="javascript:;" class="handle-icon cart-icon handle-icon-window"  @click="toggleDialog" v-show="hiddenClick">
+    <a href="/account/shoppingcart" class="handle-icon cart-icon handle-icon-window">
+      <b v-if="shopCart.Qty">{{shopCart.Qty}}</b>
+      <p class="window-top" v-show="isShow"></p>
+    </a>
+    <!-- <a href="javascript:;" class="handle-icon cart-icon handle-icon-window"  @click="toggleDialog" v-show="hiddenClick">
       <b v-if="shopCart.Qty">{{shopCart.Qty}}</b>
       <p class="window-top" v-show="isShow"></p>
     </a>
     <a href="javascript:;" class="handle-icon cart-icon handle-icon-window" v-show="!hiddenClick">
       <b v-if="shopCart.Qty">{{shopCart.Qty}}</b>
       <p class="window-top" v-show="isShow"></p>
-    </a>
+    </a> -->
     <div class="top-cart-detail top-window" v-show="isShow">
 
       <div class="window-detail-title">
@@ -85,7 +89,8 @@ export default class InsShoppingCart extends Vue {
     });
   }
   mounted () {
-    this.$store.dispatch('setShopCart', this.$Api.shoppingCart.getShoppingCart());
+    // this.$store.dispatch('setShopCart', this.$Api.shoppingCart.getShoppingCart());
+    this.getShopCart();
   }
   get shopCarts () {
     return this.$store.state.shopCart;
@@ -136,8 +141,8 @@ export default class InsShoppingCart extends Vue {
 /*头部购物车弹框 css*/
 .handle-icon {
     display: block;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 2rem;
+    height: 2rem;
     color: #cccccc;
     -webkit-transition-duration: 0.1s;
     transition-duration: 0.1s;

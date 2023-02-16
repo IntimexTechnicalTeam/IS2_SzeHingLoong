@@ -126,35 +126,43 @@ input[type="number"]{
   border-left: 1px solid @base_color;
 }
 .last,.next{
-  height: 2.3rem;
-  line-height: 2.3rem;
+  height: 35px;
+  line-height: 32px;
   cursor: pointer;
   display: inline-block;
   border: 1px solid @base_color;
   margin:0 .5rem;
   padding: 0 1rem;
+  box-sizing: border-box;
+  color: @base_color;
+  font-size: 16px;
 }
 .noClick{
-  color: black;
+  color: @base_color;
   background: white;
   cursor: not-allowed;
   border: 1px solid @base_color;
-  line-height: 2.3rem;
+  line-height: 32px;
   display: inline-block;
+  box-sizing: border-box;
+  font-size: 16px;
 }
 .selectPage{
     border: 1px solid @base_color;
-    height: 2.45rem;
+    height: 35px;
     padding: 0 0.5rem;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     outline: 0;
-    background: @base_color;
-    color: #fff;
+    background: #fff;
+    color: @base_color;
+    font-size: 16px;
 }
 .pageing{
   letter-spacing: 2px;
   margin-left: 5px;
   margin-right: 5px;
+  font-size: 16px;
+  color: #999999;
 }
 </style>

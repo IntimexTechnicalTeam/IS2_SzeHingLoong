@@ -3,20 +3,22 @@
         <div class="header_logo" v-if="!this.FrontE.slideMenu.Embedded">
             <i class="el-icon-close" @click="closeSlideMenu"></i>
         </div>
-        <div class="searchBox">
-            <input type="text" v-model="searchKey" />
-            <span class="search_btn"  @click="searchFun(searchKey)"><img src="/images/mobile/searchbtn.png"></span>
+        <div class="menu_top">
+            <!-- <ins-fav  /> -->
+             <ins-login class="fav" />
+            <CodeSelect class="header-code" />
+            <ins-lang-switch class="headerLang" />
         </div>
         <div id="menu">
             <Menu :backColor="'@base_color'" :textColor="'#fff'" :uniqueOpened="true" />
         </div>
-        <div class="menu_footer">
+        <!-- <div class="menu_footer">
             <div class="innerShare">
                 <a href="https://www.facebook.com/hktastefood/" class="nav" target="_blank"><img src="/images/mobile/facebook.png"/></a>
                 <a href="https://www.facebook.com/hktastefood/" class="nav" target="_blank"><img src="/images/mobile/ig.png"/></a>
                 <a href="https://www.youtube.com/embed/videoseries?list=PLeU-XfKN4KcjVolI4daTvRI2oNOSLCILM"  class="nav" target="_blank"><img src="/images/mobile/youtube.png" /></a>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -27,7 +29,10 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
   components: {
     InsLogo: () => import('@/components/base/mobile/InsLogo.vue'),
     Menu: () => import('@/components/business/mobile/header/InsElMenu.vue'),
-    InsLangSwitch: () => import('@/components/business/mobile/header/InsLangSwitch.vue')
+    InsLangSwitch: () => import('@/components/business/mobile/header/InsLangSwitch.vue'),
+    InsFav: () => import('@/components/business/mobile/header/InsFav.vue'),
+    CodeSelect: () => import('@/components/business/mobile/header/InsCodeSelect.vue'),
+    InsLogin: () => import('@/components/business/mobile/header/InsLogin.vue')
   }
 })
 export default class InsMenuLayout extends Vue {
@@ -147,13 +152,18 @@ export default class InsMenuLayout extends Vue {
     .el-submenu__title {
         padding-top: 0.375rem;
         padding-bottom: 0.375rem;
-        border: 1px solid #666;
+        // border: 1px solid #666;
         height: auto!important;
         line-height: unset;
-        background-color:#fff!important;
+        background-color:transparent!important;
         .name{
-            font-size: 1.6rem!important;
-            color:#666;
+            font-size: 1.4rem!important;
+            color:#fff;
+            text-transform: uppercase;
+            // letter-spacing: 2px;
+        }
+        i{
+            color: #fff;
         }
     }
 
@@ -167,43 +177,81 @@ export default class InsMenuLayout extends Vue {
         .el-submenu__icon-arrow {
             display: block;
             font-size: 1.6rem;
+            margin-top: -10px;
         }
 
         > li {
             height: auto;
             line-height: unset;
             text-align: center;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            // background: url('/images/mobile/meunbg.png') no-repeat top center;
+            background-color: #8c122f !important;
+            background-size: cover;
+            border-radius: 3px;
+            border: 1px solid #8c122f;
+            box-sizing: border-box;
              >a {
-                 color:#666666;
-                 background: #fff;
+                 color:#fff;
+                //  background: #fff;
                  background-size: 100% 100%;
                  display:block;
                  width: 100%;
-                 padding-top: .8rem;
-                 padding-bottom: .8rem;
+                 padding-top: 1rem;
+                 padding-bottom: 1rem;
                  margin: 0 auto;
-                 border:1px solid #666666;
+                //  border:1px solid #666666;
                  font-weight: 500;
-                 b{
+                 text-transform: uppercase;
+                 >b{
                      color:#FFF;
                      display: block;
                      width: 100%;
                      font-weight: 500;
+                     text-transform: uppercase;
+                    //  letter-spacing: 2px;
                      &:nth-child(1){
-                        color:#666666;
+                        color:#fff;
                         font-weight: 500;
-                        font-size: 1.6rem;
+                        font-size: 1.4rem;
                      }
                      &:nth-child(2){
-                         color:#262626;
-                         font-size: 1.2rem;
+                         color:#fff;
+                         font-size: 1.4rem;
                      }
                  }
             }
 
             a {
                 text-decoration: none;
+            }
+            >ul{
+                margin-top: 0;
+                margin-bottom: 0;
+                >li{
+                    background: transparent;
+                    border: none;
+                    margin-bottom: 0;
+                    >a{
+                        color:#ffd9e2;
+                        //  background: #fff;
+                        background-size: 100% 100%;
+                        display:block;
+                        width: 100%;
+                        padding-top: 0;
+                        padding-bottom: 1rem;
+                        margin: 0 auto;
+                        //  border:1px solid #666666;
+                        font-weight: 500;
+                        text-transform: capitalize;
+                        b{
+                            text-transform: capitalize;
+                            font-size: 1.2rem !important;
+                            color: #ffd9e2 !important;
+                            letter-spacing: 0;
+                        }
+                    }
+                }
             }
         }
 
@@ -215,7 +263,7 @@ export default class InsMenuLayout extends Vue {
     }
 }
 #menu .is-opened > .el-submenu__title{
-    background: #666!important;
+    background: transparent!important;
     color:#fff!important;
     .name{
         color:#FFF!important;
@@ -265,6 +313,34 @@ export default class InsMenuLayout extends Vue {
             color: #127437;
             font-weight: bold;
         }
+    }
+}
+.menu_top{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin: 1rem auto;
+    /deep/ .fav{
+        width: 33.33%;
+        height: 2.5rem;
+        border-right: 1px solid #e6e6e6;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+    }
+    /deep/ .main-code{
+        width: 33.33%;
+        height: 2.5rem;
+        border-right: 1px solid #e6e6e6;
+        text-align: center;
+        display: flex;
+    }
+    /deep/ .langSwitch{
+        width: 33.33%;
+        height: 2.5rem;
+        text-align: center;
+        display: flex;
     }
 }
 </style>

@@ -7,6 +7,10 @@
             <div class="in_pdWindow_item_price">
               <inPrices :primePrices="item.ListPrice" :currentPrices="item.SalePrice" :currency="item.Currency" :DefaultListPrice="item.DefaultListPrice" :DefaultSalePrice="item.DefaultSalePrice" :DefaultCurrency="item.DefaultCurrency" size="small"></inPrices>
             </div>
+
+        </div>
+        <div class="addToCartItem">
+          <span @click="addCart(item)">{{$t('product.addToCart')}}</span>
         </div>
     </div>
 </template>
@@ -37,6 +41,22 @@ export default class InsProductWindow extends Vue {
     loadError (e) {
       e.target.src = '/static/Image/proddef.jpg';
     }
+    addCart (val) {
+      console.log(val.Sku);
+      this.$Api.product.GetProduct(val.Sku).then((result) => {
+        this.$Api.shoppingCart.addItem(val.Sku, 1, '1', '1', '1')
+          .then(
+            (result) => {
+              this.$message({
+                message: result.Message.Message as string,
+                type: 'success',
+                customClass: 'messageboxNoraml'
+              });
+            }).then(() => {
+            this.$store.dispatch('setShopCart', this.$Api.shoppingCart.getShoppingCart());
+          }).catch();
+      });
+    }
 }
 </script>
 <style lang="less">
@@ -45,44 +65,50 @@ export default class InsProductWindow extends Vue {
   display: inline-block;
   text-align: center;
 }
-.in_pdWindow_item_price .currentPricesMain  .small:nth-child(1) {
+.in_pdWindow_item_price .currentPricesMain  .small {
   font-size: 1.2rem;
   word-break: break-all;
   text-align: center;
-  color: #0b0b0b;
+  color: #cd0909;
   display: inline-block;
 }
-.in_pdWindow_item_price .currentPricesMain .small:nth-child(2) {
-    font-size: 1.4rem;
-    color: #cd0909;
-    display: inline-block;
-}
-.in_pdWindow_item_price .primePricesMain  .small:nth-child(1) {
-  font-size: 1.2rem;
+// .in_pdWindow_item_price .currentPricesMain .small:nth-child(2) {
+//     font-size: 1.4rem;
+//     color: #cd0909;
+//     display: inline-block;
+// }
+.in_pdWindow_item_price .primePricesMain  .small {
+  font-size: 1rem;
   word-break: break-all;
   text-align: center;
   color: #999;
   display: inline-block;
   text-decoration: line-through;
 }
-.in_pdWindow_item_price .primePricesMain .small:nth-child(2) {
-    font-size: 1.2rem;
-    color: #999;
-  display: inline-block;
-}
+// .in_pdWindow_item_price .primePricesMain .small:nth-child(2) {
+//     font-size: 1.2rem;
+//     color: #999;
+//   display: inline-block;
+// }
 </style>
 <style lang="less" scoped>
+.in_pdWindow_item_price{
+  height: 3rem;
+}
+.in_pdWindow_page_item{
+  position: relative;
+}
 .in_pdWindow_page_item img {
   box-sizing: border-box;
   cursor: pointer;
   width: 100%;
   border: 1px solid #cdcdcd;
 }
-.height_line {
-  border: 1px solid black !important;
-}
+// .height_line {
+//   border: 1px solid black !important;
+// }
 .in_pdWindow_item_title {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     width: 90%;
     margin: 0 auto;
     text-align: center;
@@ -90,7 +116,7 @@ export default class InsProductWindow extends Vue {
     line-height: 25px;
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     word-break: break-word;
     margin-top: .5rem;
@@ -101,4 +127,26 @@ export default class InsProductWindow extends Vue {
   color: #999999;
   text-align: center;
 }
+.addToCartItem {
+    width: 90%;
+    display: inline-block;
+    left: 50%;
+    bottom: -2.5rem;
+    transform: translateX(-50%);
+    // background: #112346;
+    background: rgba(170,22,56,.7);
+    position: absolute;
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    transition: opacity .3s;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    opacity: 1;
+    span {
+      width: 100%;
+      display: inline-block;
+      color: #fff;
+    }
+  }
 </style>

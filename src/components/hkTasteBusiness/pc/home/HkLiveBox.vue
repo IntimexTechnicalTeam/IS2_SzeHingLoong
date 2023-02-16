@@ -1,6 +1,6 @@
 <template>
-  <div class="indexHotVideo">
-    <div class="TitleBg"><div class="innerBox">{{$t('Cms.WhatNews')}}</div></div>
+  <div class="indexHotVideo fade-in">
+    <!-- <div class="TitleBg"><div class="innerBox">{{$t('Cms.WhatNews')}}</div></div> -->
     <div class="HotVideoMain">
       <div class="leftVideo">
         <p v-html="videoContent.Body"></p>
@@ -28,27 +28,46 @@ export default class PkLiveBox extends Vue {
   get lang () {
     return this.$Storage.get('locale');
   }
+  LiveScroll () {
+    let fadeInElements = document.getElementsByClassName('fade-in');
+    for (var i = 0; i < fadeInElements.length; i++) {
+      let elem = fadeInElements[i] as HTMLElement;
+      if (this.isElemVisible(elem)) {
+        elem.style.opacity = '1';
+      }
+    }
+  }
+  isElemVisible (el) {
+    var rect = el.getBoundingClientRect();
+    var elemTop = rect.top + 250; // 200 = buffer
+    var elemBottom = rect.bottom;
+    return elemTop < window.innerHeight && elemBottom >= 0;
+  }
   created () {
     this.getVideoContent();
     this.getFbContent();
+    document.addEventListener('scroll', this.LiveScroll);
+  }
+  destroyed () {
+    document.removeEventListener('scroll', this.LiveScroll);
   }
 }
 </script>
 <style  lang="less">
-.HotVideoMain .leftVideo iframe{
-  width: 100%;
-  height: 500px;
-}
-.HotVideoMain .leftVideo img{
-  width: 100%;
-}
-.HotVideoMain .rightVideo iframe{
-  width: 100%;
-  height: 500px;
-}
-.HotVideoMain .rightVideo img{
-  width: 100%;
-}
+// .HotVideoMain .leftVideo iframe{
+//   width: 100%;
+//   height: 500px;
+// }
+// .HotVideoMain .leftVideo img{
+//   width: 100%;
+// }
+// .HotVideoMain .rightVideo iframe{
+//   width: 100%;
+//   height: 500px;
+// }
+// .HotVideoMain .rightVideo img{
+//   width: 100%;
+// }
 </style>
 <style scoped lang="less">
 .TitleBg{
@@ -74,33 +93,33 @@ export default class PkLiveBox extends Vue {
 .indexHotVideo{
     width: 100%;
     background-size: 100% 100%;
-    display: inline-block;
+    display: block;
     padding-top: 90px;
     padding-bottom: 90px;
-    background: url('/images/pc/pcindex_04.jpg') no-repeat center center;
+    // background: url('/images/pc/pcindex_04.jpg') no-repeat center center;
 }
 .HotVideoMain{
     width: 1200px;
     margin: 0 auto;
 }
 .HotVideoMain .leftVideo{
-    width: 55%;
+    width: 770px;
     float: left;
-    margin-right: 5%;
+    margin-right: 2%;
     background-size: 100% 100%;
     box-sizing: border-box;
-    padding: 30px;
+    // padding: 30px;
 }
 .HotVideoMain .leftVideo img{
     width: 100%;
     margin: 0 auto;
 }
 .HotVideoMain .rightVideo{
-    width: 40%;
+    width: 400px;
     float: left;
     background-size: 100% 100%;
     box-sizing: border-box;
-    padding: 30px;
+    // padding: 30px;
 }
 .HotVideoMain .rightVideo img{
     width: 100%;
@@ -118,5 +137,12 @@ export default class PkLiveBox extends Vue {
     background-size: 100%;
     margin: 0 auto;
     margin-bottom: 70px;
+}
+.fade-in {
+  opacity: 0;
+  transition: 0.5s all ease-out;
+  // transform: translate(0, 30px);
+  box-sizing: border-box;
+  display: inline-block;
 }
 </style>

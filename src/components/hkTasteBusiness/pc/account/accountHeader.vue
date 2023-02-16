@@ -153,6 +153,7 @@ ul,li{
             font-size: 24px;
             color:#FFF;
             margin-bottom: 30px;
+            text-align: center;
           }
           a{
             display: inline-block;
@@ -177,5 +178,8 @@ ul,li{
       }
     }
 }
-
+.leftnav{
+  display: flex;
+  justify-content: center;
+}
 </style>
