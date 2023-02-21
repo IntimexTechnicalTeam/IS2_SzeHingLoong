@@ -13,6 +13,9 @@
                 <div class="btn-box">
                   <ElButton type="primary" @click="CheckPwdSubmit('pwdForm')" class="resetBtn">{{$t('DeliveryAddress.SaveBtn')}}</ElButton>
                 </div>
+                <div class="btn-box">
+                  <ElButton type="primary" @click="resetForm('pwdForm')" class="reset-btn">{{$t('DeliveryAddress.ResetBtn')}}</ElButton>
+                </div>
               </div>
             </InsForm>
           </div>
@@ -118,6 +121,10 @@ export default class InsModifyPassword extends Vue {
       });
     });
   }
+
+  resetForm(formName) {
+    (this.$refs[formName] as InsForm).reset();
+  }
 }
 </script>
 <style lang="less">
@@ -139,7 +146,7 @@ export default class InsModifyPassword extends Vue {
     box-sizing: border-box;
 }
 .MembercenterMobile .MemberInfoMain .el-button--primary span{
-  font-size: 20px!important;
+  font-size: 16px!important;
 }
 .MembercenterMobile .MemberInfoMain .el-form-item__label{
     width: 100%;
@@ -193,8 +200,11 @@ export default class InsModifyPassword extends Vue {
     display: block;
     background: #333333;
     background-size: 100%;
-    height: 4rem;
+    // height: 3.5rem;
     border:0px!important;
+    padding: 12px;
+    line-height: 16px;
+    font-size: 16px;
 }
 .MembercenterMobile .MemberInfoMain .el-input.is-disabled .el-input__inner{
       // border: 1px solid #535353!important;
@@ -249,5 +259,12 @@ export default class InsModifyPassword extends Vue {
 .MembercenterMobile  .input_outer{
   padding-bottom: 30px;
   padding-top: 0px!important;
+}
+.MembercenterMobile .MemberInfoMain .reset-btn{
+    color: #333 !important;
+    background: #fff;
+    border: 1px solid #333 !important;
+    box-sizing: border-box;
+    margin-top: 30px;
 }
 </style>

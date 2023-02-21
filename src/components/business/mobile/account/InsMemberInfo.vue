@@ -254,7 +254,7 @@ export default class InsMemberInfo extends Vue {
     box-sizing: border-box;
 }
 .MembercenterMobile .MemberInfoMain .el-button--primary span{
-  font-size: 20px!important;
+  font-size: 16px!important;
 }
 .MembercenterMobile .MemberInfoMain .el-form-item__label{
     width: 100%;
@@ -308,8 +308,11 @@ export default class InsMemberInfo extends Vue {
     display: block;
     background: #333333;
     background-size: 100%;
-    height: 4rem;
+    // height: 4rem;
     border:0px!important;
+    padding: 12px;
+    line-height: 16px;
+    font-size: 16px;
 }
 .MembercenterMobile .MemberInfoMain .el-input.is-disabled .el-input__inner{
       // border: 1px solid #535353!important;

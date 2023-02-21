@@ -467,8 +467,11 @@ export default class InsDeliveryAddress extends Vue {
     display: block;
     background: #333333;
     background-size: 100%;
-    height: 4rem;
+    // height: 4rem;
     border:0px!important;
+    padding: 12px;
+    line-height: 16px;
+    font-size: 16px;
 }
 .MembercenterMobile .MemberInfoMain .el-input.is-disabled .el-input__inner{
       // border: 1px solid #535353!important;
@@ -522,7 +525,7 @@ export default class InsDeliveryAddress extends Vue {
   width: 100%;
 }
 .MembercenterMobile .delivery-address  .btn-box .el-button span{
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .MembercenterMobile .delivery-address .el-card__body{
@@ -680,6 +683,6 @@ export default class InsDeliveryAddress extends Vue {
     border:0px!important;
 }
 .delivery-address .el-button > span{
-  font-size: 20px!important;
+  font-size: 16px!important;
 }
 </style>

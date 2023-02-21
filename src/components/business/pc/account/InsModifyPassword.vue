@@ -11,7 +11,10 @@
               </div>
               <div class="login-register-handle">
                 <div class="btn-box">
-                  <ElButton type="primary" @click="CheckPwdSubmit('pwdForm')" class="resetBtn" style="width:100%;margin-left:0%;">{{$t('DeliveryAddress.SaveBtn')}}</ElButton>
+                  <ElButton type="primary" @click="CheckPwdSubmit('pwdForm')" class="resetBtn">{{$t('DeliveryAddress.SaveBtn')}}</ElButton>
+                </div>
+                <div class="btn-box">
+                  <ElButton type="primary" @click="resetForm('pwdForm')" class="reset-btn">{{$t('DeliveryAddress.ResetBtn')}}</ElButton>
                 </div>
               </div>
             </InsForm>
@@ -25,6 +28,7 @@ import { Form, Input, Message, Button, FormItem } from 'element-ui';
 import sdk from '@/sdk/InstoreSdk';
 import InsInput2 from '@/components/base/pc/InsInput2.vue';
 import InsForm from '@/components/base/pc/InsForm.vue';
+import { ElForm } from 'element-ui/types/form';
 @Component({
   components: {
     accountHeader: () => import('@/components/hkTasteBusiness/pc/account/accountHeader.vue'),
@@ -118,6 +122,10 @@ export default class InsModifyPassword extends Vue {
         }
       });
     });
+  }
+
+  resetForm(formName) {
+    (this.$refs[formName] as InsForm).reset();
   }
 }
 </script>
@@ -242,14 +250,27 @@ export default class InsModifyPassword extends Vue {
 .MemberInfoMain .el-form-item__content,.MemberInfoMain .el-form-item__label-wrap{
   margin-left: 0px!important;
 }
+.MemberInfoMain .btn-box{
+  width: 48%;
+  float: left;
+}
+.MemberInfoMain .btn-box:last-child{
+  float: right;
+}
 .MemberInfoMain .el-button{
     background: #333333;
-    border: none;
+    border: 1px solid transparent;
     display: block;
     border-radius: 20px;
-    width: 60%;
-    float: left;
-    margin-left: 25%;
+    width: 100%;
+    // float: left;
+    margin-left: 0;
     padding: 0;
+}
+.MemberInfoMain .reset-btn{
+    color: #333;
+    background: #fff;
+    border: 1px solid #333;
+    box-sizing: border-box;
 }
 </style>

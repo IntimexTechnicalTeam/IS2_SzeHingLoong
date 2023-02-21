@@ -7,7 +7,7 @@
     </div>
     <div class="ProductSearch">
       <div class="SearchSlide">
-        <div class="drawer-bg" v-if="showSearchSlide"  @click="handleClickOutside"/>
+        <div class="bg" @click="closeSub"></div>
         <div class="leftSide">
           <advancedSearch
             @advancedChange="advancedChange"
@@ -309,6 +309,14 @@ export default class InsProductSearch extends Vue {
     box-shadow: 0 0 6px #999;
     // overflow-x: scroll;
     z-index: 999999;
+  }
+  > .bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(0,0,0,.6);
   }
 }
 .ProductSearch {

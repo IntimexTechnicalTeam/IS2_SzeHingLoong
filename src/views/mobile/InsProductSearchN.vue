@@ -4,7 +4,7 @@
             <ProductListSwiper/>
         </div>
         <div class="SearchSlide">
-          <div class="drawer-bg" v-if="showSearchSlide"  @click="handleClickOutside"/>
+          <div class="bg" @click="closeSub"></div>
           <div class="leftSide">
             <advancedSearch @advancedChange="advancedChange" v-if="isAdvanced"  @closeSub="closeSub" @resetAll="resetAll" />
           </div>
@@ -146,10 +146,6 @@ export default class InsProductSearch extends Vue {
     if (this.totalRecord !== this.proList.length) { this.currentPage++; } else { this.tips = false; }
   }
 
-  handleClickOutside() {
-    this.closeSub();
-  }
-
   mounted () {
 
   }
@@ -254,7 +250,14 @@ export default class InsProductSearch extends Vue {
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
   }
-
+  > .bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(0,0,0,.6);
+  }
 }
 .closeBar{
     left: 0%!important;
@@ -328,15 +331,5 @@ export default class InsProductSearch extends Vue {
       // color:#333333;
     }
   }
-}
-.drawer-bg {
-  // background: #000;
-  // opacity: 0.3;
-  width: 100%;
-  top: 0;
-  height: 100%;
-  position: fixed;
-  z-index: 999;
-  background: rgba(0,0,0,.6);
 }
 </style>
