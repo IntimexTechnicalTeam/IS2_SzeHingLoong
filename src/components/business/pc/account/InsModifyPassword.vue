@@ -272,5 +272,6 @@ export default class InsModifyPassword extends Vue {
     background: #fff;
     border: 1px solid #333;
     box-sizing: border-box;
+    margin-top: 30px;
 }
 </style>
