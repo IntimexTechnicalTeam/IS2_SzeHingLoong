@@ -86,6 +86,7 @@
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
 import { Loading, Card, Row, Col as ElCol, Button as ElButton } from 'element-ui';
+import { AppId, PayUrl } from '@/sdk/common/SysConst';
 @Component({
   components: {
     accountHeader: () => import('@/components/hkTasteBusiness/pc/account/accountHeader.vue'),
@@ -132,6 +133,8 @@ export default class InsOrderList extends Vue {
   // 支付打开页面
   PayNow (order) {
     window.location.href = '/PG/pay/' + order.PaymentMethod + '/IS/' + order.OrderId;
+    var url = PayUrl;
+    // window.location.href = url.replace('APPID', AppId).replace('ORDERID', order.OrderId).replace('PAYMENT_TYPE', order.PaymentMethod);
   }
   OrderComment (order) {
     this.$router.push({
@@ -175,6 +178,7 @@ export default class InsOrderList extends Vue {
   margin: 0 auto;
   margin-top: 50px;
   position: relative;
+  padding-bottom: 50px;
 }
 .OrderCard {
   padding-bottom: 10px;

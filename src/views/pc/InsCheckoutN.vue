@@ -617,7 +617,7 @@ export default class InsCheckoutN extends Vue {
 </style>
 <style lang="less">
 .PcV .el-input__inner{
-  width: auto!important;
+  width: 100%!important;
   padding-right: 0px!important;
 }
 .PcV .el-radio, .el-radio--medium.is-bordered .el-radio__label{

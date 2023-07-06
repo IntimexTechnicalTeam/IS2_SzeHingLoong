@@ -28,6 +28,7 @@
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
 import Order from '@/model/order';
 import InsButton from '@/components/base/mobile/InsButton.vue';
+import { AppId, PayUrl } from '@/sdk/common/SysConst';
 @Component({ components: { InsButton } })
 export default class InsCompleteCheckout extends Vue {
     private Order:Order =new Order();
@@ -68,6 +69,8 @@ export default class InsCompleteCheckout extends Vue {
     }
     pay (pay) {
       window.location.href = '/PG/pay/' + this.Order.PaymentMethod + '/IS/' + this.orderId;
+      var url = PayUrl;
+      // window.location.href = url.replace('APPID', AppId).replace('ORDER_ID', this.orderId).replace('PAYMENT_TYPE', this.Order.PaymentMethod);
     }
     // get paymentCode () {
     //   return this.$store.state.paymentMethod.Code;

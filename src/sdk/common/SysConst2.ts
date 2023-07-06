@@ -4,6 +4,8 @@ const AppId = '2ddbf9b5-fac4-4829-95e1-56e825a7e90e';
 // let AdminServer = 'https://admin.uat.intimex.hk'; // UAT
 let AdminServer = ana.AdminServer;
 let apiServer = ana.apiServer;
+let PayUrl = ana.PayUrl;
+let RnpUrl = ana.RnpUrl;
 module.exports = {
   // instore app id admin的id
   AppId: AppId, // hongkong taste
@@ -11,6 +13,10 @@ module.exports = {
   // ApiServer: '/Api', // new uat and production
   // ApiServer: 'http://api.dev.in-store.hk:84', // DEV
   ApiServer: apiServer, // UAT
+  // 正常支付地址
+  PayUrl: PayUrl,
+  // Regnpay支付地址
+  RnpUrl: RnpUrl,
   // ApiServer: 'https://api.uat.in-store.hk', // Production
   // api version for this app 統一配置Api版本號
   ApiVersion: 'V2',

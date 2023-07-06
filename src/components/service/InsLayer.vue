@@ -2,7 +2,7 @@
   <transition name="fade">
       <div v-if="show" id="level1Layer" @scroll.prevent @mousewheel.prevent>
         <div v-if="userAgent==='pc' && !pcBuilding"></div>
-        <div ref="layerbody" class="layer_body" :class="{'layer_body_mobile':userAgent==='mobile'}"> </div>
+        <div ref="layerbody" class="layer_body animate__animated animate__flipInX" :class="{'layer_body_mobile':userAgent==='mobile'}"> </div>
       </div>
   </transition>
 </template>
@@ -26,8 +26,8 @@ export default class InsLayer extends Vue {
       Loading.service({
         target: this.$refs.layerbody as any,
         text: '',
-        fullscreen: false,
-        spinner: 'el-icon-loading',
+        fullscreen: true,
+        spinner: 'el-loading-spinner2',
         customClass: 'IconSize'
       });
     }
@@ -37,8 +37,8 @@ export default class InsLayer extends Vue {
       Loading.service({
         target: this.$refs.layerbody as any,
         text: '',
-        fullscreen: false,
-        spinner: 'el-icon-loading',
+        fullscreen: true,
+        spinner: 'el-loading-spinner2',
         customClass: 'IconSize'
       });
     }
@@ -55,8 +55,32 @@ export default class InsLayer extends Vue {
 </script>
 <style lang="less">
 .IconSize{
-  .el-icon-loading{
-   font-size: 30px;
+  background: #fff!important;
+  // .el-icon-loading{
+  //  font-size: 30px;
+  // }
+  .el-loading-spinner2 {
+    /*这个是自己想设置的 gif 加载动图*/
+    background-image: url('/images/pc/pcindex_09.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 200px;
+    width: 200px;
+    background-position: center;
+    /*覆盖 element-ui  默认的 50%    因为此处设置了height:100%,所以不设置的话，会只显示一半，因为被top顶下去了*/
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+}
+}
+@media (min-width:320px)and(max-width:640px){
+  .IconSize .el-loading-spinner2{
+    height: 150px;
+    width: 150px;
+    background-image: url('/images/pc/pcindex_09.png');
+    background-repeat: no-repeat;
+    background-size: contain;
   }
 }
 </style>
@@ -89,4 +113,5 @@ export default class InsLayer extends Vue {
 .fade-enter, .fade-leave-to {
   opacity: 0;
 }
+
 </style>
