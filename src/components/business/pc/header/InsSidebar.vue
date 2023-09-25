@@ -7,7 +7,7 @@
 
       <span v-show="show">
         <a
-          href="https://api.whatsapp.com/send?phone=8529876%205436&text=%E6%88%91%E6%83%B3%E6%9F%A5%E8%AF%A2%E4%B8%80%E4%B8%8B"
+          href="https://api.whatsapp.com/send?phone=85267287280&text=%E6%88%91%E6%83%B3%E6%9F%A5%E8%AF%A2%E4%B8%80%E4%B8%8B"
           target="_blank"
           ><img src="/static/Image/mobile/home/whatsapp.png"
         /></a>
@@ -47,7 +47,7 @@
         </div>
         <div class="fb-credit">
           <a href="https://www.facebook.com/hktastefood/" target="_blank"
-            >Facebook Chat Widget by Style3-New</a
+            >Facebook Chat Widget by 時興隆(香港)有限公司</a
           >
         </div>
         <div id="fb-root"></div>

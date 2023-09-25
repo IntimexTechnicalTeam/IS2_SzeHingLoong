@@ -15,8 +15,8 @@
                   <a @click="pay" v-show="currentlang==='E'"><img src="/images/pc/PayMeButton Round.png"></a>
                   <a @click="pay" v-show="currentlang==='C'"><img src="/images/pc/PayMeButton Round.png"></a>
                   <a @click="pay" v-show="currentlang==='S'"><img src="/images/pc/PayMeButton Round.png"></a>
-            </div>
-            <div  v-else><ins-button :nama="$t('CheckOut.pay')" action="pay" type="primary" @click="pay" size="huge" style="margin-top:1rem;cursor: pointer;font-size:1.6rem;padding-top: .5rem;padding-bottom: .5rem;"/></div>
+              </div>
+              <div v-else><ins-button :nama="$t('CheckOut.pay')" action="pay" type="primary" @click="pay" size="huge" style="margin-top:1rem;cursor: pointer;font-size:1.6rem;padding-top: .5rem;padding-bottom: .5rem;"/></div>
           </div>
       </div>
     </div>
