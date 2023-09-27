@@ -60,14 +60,12 @@ export default class InsLayer extends Vue {
   //  font-size: 30px;
   // }
   .el-loading-spinner2 {
-    /*这个是自己想设置的 gif 加载动图*/
     background-image: url('/images/pc/pcindex_09.png');
     background-repeat: no-repeat;
     background-size: contain;
     height: 200px;
     width: 200px;
     background-position: center;
-    /*覆盖 element-ui  默认的 50%    因为此处设置了height:100%,所以不设置的话，会只显示一半，因为被top顶下去了*/
     top: 50%;
     left: 50%;
     position: absolute;
